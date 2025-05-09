@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+keycloak:
+  server-url: http://localhost:8080
+  realm: sarc
+  client-id: backend
+  client-secret: rDSPaG1rjcOiAlA2lnd9TNP0mmpqHnL8
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5434/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/sarc
+  application:
+    name: sarc
