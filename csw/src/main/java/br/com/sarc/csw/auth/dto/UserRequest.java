@@ -22,9 +22,4 @@ public class UserRequest {
     @NotBlank(message = "Password is required")
     private String password;
 
-    @JsonProperty("first-name")
-    private String firstName;
-
-    @JsonProperty("last-name")
-    private String lastName;
 }

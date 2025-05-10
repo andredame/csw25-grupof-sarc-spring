@@ -1,4 +1,4 @@
-package br.com.sarc.csw.auth.Service;
+package br.com.sarc.csw.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -71,9 +71,6 @@ public class AuthService {
         payload.put("username", user.getUsername());
         payload.put("email", user.getUsername());
         payload.put("emailVerified", true);
-        payload.put("enabled", true);
-        payload.put("firstName", user.getFirstName());
-        payload.put("lastName", user.getLastName());
         payload.put("credentials", List.of(Map.of(
                 "type", "password",
                 "value", user.getPassword(),
@@ -111,18 +108,12 @@ public class AuthService {
                     UserResponse u = new UserResponse();
                     u.setId((String) map.get("id"));
                     u.setUsername((String) map.get("username"));
-                    u.setFirstName((String) map.get("firstName"));
-                    u.setLastName((String) map.get("lastName"));
-                    u.setEnabled((Boolean) map.getOrDefault("enabled", true));
                     return u;
                 })
                 .filter(user -> enabled.map(e -> user.isEnabled() == e).orElse(true))
                 .toList();
     }
 
-    // Implementar outras funções (updateUser, updatePassword, disableUser) de forma semelhante
-
-    // Método para criar o usuário no banco de dados e sincronizar com o Keycloak
    
 }
 

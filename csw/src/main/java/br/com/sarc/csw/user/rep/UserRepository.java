@@ -1,8 +1,9 @@
-package br.com.sarc.csw.user;
+package br.com.sarc.csw.user.rep;
 
-import br.com.sarc.csw.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import br.com.sarc.csw.user.model.User;
 
 import java.util.Optional;
 

@@ -1,12 +1,11 @@
 package br.com.sarc.csw.auth.controller;
 
-import br.com.sarc.csw.auth.Service.AuthService;
 import br.com.sarc.csw.auth.dto.LoginRequest;
 import br.com.sarc.csw.auth.dto.TokenResponse;
 import br.com.sarc.csw.auth.dto.UserRequest;
 import br.com.sarc.csw.auth.dto.UserResponse;
-import br.com.sarc.csw.user.JwtService;
-import br.com.sarc.csw.user.UserService;
+import br.com.sarc.csw.auth.service.AuthService;
+import br.com.sarc.csw.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
-package br.com.sarc.csw.user;
-import br.com.sarc.csw.user.JwtService;
-import br.com.sarc.csw.user.User;
-import br.com.sarc.csw.user.UserService;
+package br.com.sarc.csw.user.controller;
+import br.com.sarc.csw.user.model.User;
+import br.com.sarc.csw.user.service.UserService;
 import lombok.AllArgsConstructor;
 
 import lombok.RequiredArgsConstructor;
@@ -15,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final JwtService jwtService;
     private final UserService userService;
 
     @GetMapping("/me")
     public ResponseEntity<User> getUserInfo(@AuthenticationPrincipal Jwt jwt) {
         String userId = jwt.getSubject();
+        System.out.println("User ID: " + userId);
         User user = userService.getUserById(userId);
         return ResponseEntity.ok(user);
     }

@@ -9,9 +9,5 @@ import lombok.Setter;
 public class UserResponse {
     private String id;
     private String username;
-    @JsonProperty("first-name")
-    private String firstName;
-    @JsonProperty("last-name")
-    private String lastName;
     private boolean enabled;
 }
