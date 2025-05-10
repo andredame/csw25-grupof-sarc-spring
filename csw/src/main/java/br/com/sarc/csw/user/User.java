@@ -28,17 +28,12 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
+    @Column(name = "date_of_birth")
+    private String dateOfBirth;
 
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
-    @Column(name = "enabled", nullable = false)
-    private Boolean enabled;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role")
-    private Set<String> roles;
+
 }

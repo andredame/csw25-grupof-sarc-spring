@@ -18,7 +18,7 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody();
 
-        return claims.getSubject(); // O "sub" contém o ID do usuário no Keycloak
+        return claims.getSubject(); 
     }
 
     public String getUsernameFromToken(String token) {

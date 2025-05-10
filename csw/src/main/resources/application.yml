@@ -5,9 +5,13 @@ keycloak:
   server-url: http://localhost:8080
   realm: sarc
   client-id: backend
-  client-secret: rDSPaG1rjcOiAlA2lnd9TNP0mmpqHnL8
+  client-secret: cN1U5N6T3i6ztsdSKqf1Wf3vGhor4gUP
 
 spring:
+  sql:
+      init:
+        mode: always
+        data-locations: classpath:script.sql
   datasource:
     url: jdbc:postgresql://localhost:5434/postgres
     username: postgres
@@ -17,6 +21,7 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
+    defer-datasource-initialization: true 
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -27,3 +32,8 @@ spring:
           issuer-uri: http://localhost:8080/realms/sarc
   application:
     name: sarc
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
