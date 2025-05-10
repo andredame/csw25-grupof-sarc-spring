@@ -1,6 +1,6 @@
-package br.com.sarc.csw.user.controller;
-import br.com.sarc.csw.user.model.User;
-import br.com.sarc.csw.user.service.UserService;
+package br.com.sarc.csw.modules.user.controller;
+import br.com.sarc.csw.modules.user.model.User;
+import br.com.sarc.csw.modules.user.service.UserService;
 import lombok.AllArgsConstructor;
 
 import lombok.RequiredArgsConstructor;

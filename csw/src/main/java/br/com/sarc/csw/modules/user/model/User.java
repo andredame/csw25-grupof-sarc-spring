@@ -1,4 +1,4 @@
-package br.com.sarc.csw.user.model;
+package br.com.sarc.csw.modules.user.model;
 
 
 import java.util.Set;

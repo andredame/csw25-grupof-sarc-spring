@@ -1,6 +1,6 @@
-package br.com.sarc.csw.user.service;
-import br.com.sarc.csw.user.model.User;
-import br.com.sarc.csw.user.rep.UserRepository;
+package br.com.sarc.csw.modules.user.service;
+import br.com.sarc.csw.modules.user.model.User;
+import br.com.sarc.csw.modules.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
