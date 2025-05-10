@@ -3,18 +3,17 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:21.1.1
     container_name: keycloak
-
     environment:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
       - KC_HOSTNAME=localhost 
-    command: start-dev
+    command: start-dev --import-realm
     ports:
       - "8080:8080"
     depends_on:
       - postgres
     volumes:
-      - ./keycloak-export:/opt/keycloak/data/export  # Add this line
+      - ./keycloak-export:/opt/keycloak/data/import
   postgres:
     image: postgres:15.2
     container_name: postgres
