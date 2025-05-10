@@ -29,5 +29,5 @@ public class Recurso {
 
     @ManyToOne
     @JoinColumn(name = "id_tipo_recurso", nullable = false)
-    private TipoRecurso tipoRecurso;
+    private Integer tipoRecursoId; 
 }

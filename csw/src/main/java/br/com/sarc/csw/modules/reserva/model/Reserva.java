@@ -34,7 +34,5 @@ public class Reserva {
     @JoinColumn(name = "recurso_id", nullable = false)
     private Recurso recurso;
 
-    @Lob
-    private String observacao;
 
 }

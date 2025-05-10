@@ -27,7 +27,7 @@ O Keycloak está configurado para rodar em um contêiner Docker. Ele utiliza um 
    Na raiz do projeto, execute:
 
    ```bash
-   docker-compose up -d
+   docker compose up --build
    ```
 
    Isso iniciará o Keycloak na porta `8080`.
