@@ -1,0 +1,301 @@
+{
+	"info": {
+		"_postman_id": "c485ed01-e074-4235-9f4c-d1573f462142",
+		"name": "csw",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36581899"
+	},
+	"item": [
+		{
+			"name": "get token",
+			"item": [
+				{
+					"name": "Coordenador login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"mariaeduarda@edu.pucrs.br\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Professor login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"mariaeduarda@edu.pucrs.br\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"mariaeduarda@edu.pucrs.br\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aluno login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"andresilva@edu.pucrs.br\",\r\n  \"password\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sala",
+			"item": [
+				{
+					"name": "Salas by predio",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDY5NzM5NjMsImlhdCI6MTc0Njk3MzY2MywianRpIjoiMGJkMzg0MjAtZTA0Ni00OGRkLWIyMjctZTc5NmM3NTEzYWIyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjgzZTc1NjU3LWRjMWEtNDY1Ni04NzlhLTI1NGU2OTg2MjYzOSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiMDM2ODU2ZTktZWJlMS00ZWM5LWI5NDUtZjcwODE0OTJiOTNlIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIkFETUlOIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiMDM2ODU2ZTktZWJlMS00ZWM5LWI5NDUtZjcwODE0OTJiOTNlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6ImVkZ2FyIGRvcyBzYW50b3MiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIiLCJlbWFpbCI6ImVkZ2FyZG9zc2FudG9zQGVkdS5wdWNycy5iciJ9.m1CXzH9r5MhT2iK6ntn2G2uOT6oJv1I5gS88lYHEuQeeFsA8MtFxCs0z0k6reyhXeO9irf3RE60R1G3XDQ2FHbYvdVxy5E77nOVUEW5j67ev-RYkWZ-5Dc-SBsHradbBWWKKMc0ocsnvpJOLijezfTSPdrucL6cT55jvHjHxjFnEb1Ps-Oz26GHIWflVv4VdYM5QH5X_IkUoHuyG1-MDnxP2XHO-WDJ-ibgS31ifUvIRpE0ChPBnRIuBKH6e8pnmJ6QUF5PnCVRU_g26-S-bHkkESD6yrFUCAWPB2NvSi5UOTKeK7d4mCj_Zgc6g4seQwhwEfHQd7GDqhRDuIymAdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Sala 101\",\r\n  \"capacidade\": 40,\r\n  \"andar\": \"1º Andar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/predios/1/salas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"predios",
+								"1",
+								"salas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/api/predios/1/salas",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Sala 101\",\r\n  \"capacidade\": 40,\r\n  \"andar\": \"1º Andar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/predios/1/salas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"predios",
+								"1",
+								"salas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservas",
+			"item": [
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "criar reserva",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDY5ODgwNTAsImlhdCI6MTc0Njk4Nzc1MCwianRpIjoiMzk4OTVmYWEtMDBkOS00YTJiLWE3YTQtNTA2YTU2NTM2YTM2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImZlMThhNjkxLWU3ZjAtNGM1Yy05NjRmLTI3MzM4MmEzNDU5OCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiZWMxZmI0YzItMmY1My00NmQ5LTlmMjctMWQ3YjdiYzlhYTFiIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJQUk9GRVNTT1IiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImVjMWZiNGMyLTJmNTMtNDZkOS05ZjI3LTFkN2I3YmM5YWExYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqb2huIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIiwiZW1haWwiOiJqb2huQGVkdS5wdWNycy5iciJ9.sCPHql05Ec6iN9o-9sQGwXG7TFd5fsskW3_QmdmftUbH8EoC12DAs5soqUnxsB02m5oUUOxAbozU8gvmuJKc77u7Xp-4oEd2emaKeqTOO1MMfeo3aY6FRpSTa_GSNjJON0rnQHC7MxDSqLiLQJOW1P9-bHoWpIwy7JkI5c9P_yo3b9pCEdhd0PxyBHgyDHmtVBYkPEAUwvBqIAivjH7bEzHlQ5580-XjsBEOazOF73RI-SP9Ls5VqmD7gbG7Nh9UiXopOnEoM4uElnWZPIwiMWZqwMw6RaOunFHUcjBfs4obj0Euf_RybRWGeI24cv9l28Sd-goOAT8Y4IoIJIzeJQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id_aula\": 1,\r\n  \"id_recurso\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/reservas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"reservas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "get user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"johndoe\",\r\n  \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
