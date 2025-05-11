@@ -21,7 +21,7 @@ public class Aula {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "turma_id", nullable = false)

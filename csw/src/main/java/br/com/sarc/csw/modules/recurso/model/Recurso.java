@@ -21,13 +21,13 @@ public class Recurso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
 
     @Enumerated(EnumType.STRING)
     private StatusRecurso status;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo_recurso", nullable = false)
-    private Integer tipoRecursoId; 
+    @JoinColumn(name = "id_tipo_recurso", nullable = false) // Associação com a entidade TipoRecurso
+    private TipoRecurso tipoRecurso;
 }

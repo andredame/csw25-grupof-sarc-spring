@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReservaDTO {
 
-    private Integer id;
-    private Integer id_recurso;
-    private Integer id_aula;
+    private Long id_recurso;
+    private Long id_aula;
 }

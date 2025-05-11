@@ -1,12 +1,11 @@
-package br.com.sarc.csw.modules.recurso.dto;
+package br.com.sarc.csw.modules.predio.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class TipoRecursoDTO {
+public class PredioResumoDTO {
     private Long id;
     private String nome;
-    
 }

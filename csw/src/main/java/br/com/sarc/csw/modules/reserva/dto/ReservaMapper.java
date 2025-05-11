@@ -12,7 +12,6 @@ public class ReservaMapper {
         }
 
         ReservaDTO dto = new ReservaDTO();
-        dto.setId(reserva.getId());
 
         if (reserva.getAula() != null) {
             dto.setId_aula(reserva.getAula().getId());
@@ -31,7 +30,6 @@ public class ReservaMapper {
         }
 
         Reserva reserva = new Reserva();
-        reserva.setId(dto.getId());
 
         if (dto.getId_aula() != null) {
             Aula aula = new Aula();

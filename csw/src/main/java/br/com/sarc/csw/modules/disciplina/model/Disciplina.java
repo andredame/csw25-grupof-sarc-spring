@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -15,7 +14,7 @@ public class Disciplina {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String codigo;
@@ -27,6 +26,5 @@ public class Disciplina {
 
     private String semestre;
 
-    @Lob
     private String programa;
 }

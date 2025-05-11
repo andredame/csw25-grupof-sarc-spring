@@ -19,7 +19,7 @@ public class DisciplinaService {
         return disciplinaRepository.findAll();
     }
 
-    public Optional<Disciplina> getDisciplina(Integer id) {
+    public Optional<Disciplina> getDisciplina(Long id) {
         return disciplinaRepository.findById(id);
     }
 
@@ -27,7 +27,7 @@ public class DisciplinaService {
         return disciplinaRepository.save(disciplina);
     }
 
-    public Disciplina atualizarDisciplina(Integer id, Disciplina disciplinaAtualizada) {
+    public Disciplina atualizarDisciplina(Long id, Disciplina disciplinaAtualizada) {
         if (disciplinaRepository.existsById(id)) {
             disciplinaAtualizada.setId(id);
             return disciplinaRepository.save(disciplinaAtualizada);
@@ -35,7 +35,7 @@ public class DisciplinaService {
         return null;
     }
 
-    public boolean deletarDisciplina(Integer id) {
+    public boolean deletarDisciplina(Long id) {
         if (disciplinaRepository.existsById(id)) {
             disciplinaRepository.deleteById(id);
             return true;

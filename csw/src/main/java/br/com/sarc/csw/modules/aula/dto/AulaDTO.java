@@ -7,8 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class AulaDTO {
 
-    private Integer id;
+    private Long id;
     private String data;
-    private Integer turmaId;   // Apenas o ID da turma
-    private Integer salaId;    // Apenas o ID da sala
+    private Long turmaId;   // Apenas o ID da turma
+    private Long salaId;    // Apenas o ID da sala
 }

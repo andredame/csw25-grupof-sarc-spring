@@ -11,7 +11,7 @@ public class Predio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String nome;
 

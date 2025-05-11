@@ -4,6 +4,9 @@ import br.com.sarc.csw.modules.user.service.UserService;
 import lombok.AllArgsConstructor;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.UUID;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -19,8 +22,7 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<User> getUserInfo(@AuthenticationPrincipal Jwt jwt) {
         String userId = jwt.getSubject();
-        System.out.println("User ID: " + userId);
-        User user = userService.getUserById(userId);
+        User user = userService.getUserById(UUID.fromString(userId));
         return ResponseEntity.ok(user);
     }
 }

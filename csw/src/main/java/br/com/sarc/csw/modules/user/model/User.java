@@ -2,6 +2,7 @@ package br.com.sarc.csw.modules.user.model;
 
 
 import java.util.Set;
+import java.util.UUID;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -20,7 +21,7 @@ public class User {
 
     @Id
     @Column(name = "id", nullable = false, unique = true)
-    private String id; // ID do Keycloak
+    private UUID id; // ID do Keycloak
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;

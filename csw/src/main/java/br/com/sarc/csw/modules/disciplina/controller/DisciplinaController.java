@@ -37,13 +37,13 @@ public class DisciplinaController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('PROFESSOR')")
-    public ResponseEntity<DisciplinaDTO> obterDisciplina(@PathVariable Integer id) {
+    public ResponseEntity<DisciplinaDTO> obterDisciplina(@PathVariable Long id) {
         DisciplinaDTO disciplina = DisciplinaMapper.toDTO(disciplinaService.getDisciplina(id).orElse(null));
         return disciplina != null ? ResponseEntity.ok(disciplina) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('PROFESSOR')")
+    @PreAuthorize("hasRole('COORDENADOR')")
     public ResponseEntity<DisciplinaDTO> criarDisciplina(@RequestBody DisciplinaDTO disciplinaDTO) {
         DisciplinaDTO novaDisciplina = DisciplinaMapper.toDTO(disciplinaService.salvarDisciplina(DisciplinaMapper.toEntity(disciplinaDTO)));
         return ResponseEntity.ok(novaDisciplina);
@@ -52,14 +52,14 @@ public class DisciplinaController {
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('PROFESSOR')")
 
-    public ResponseEntity<DisciplinaDTO> atualizarDisciplina(@PathVariable Integer id, @RequestBody DisciplinaDTO disciplinaDTO) {
+    public ResponseEntity<DisciplinaDTO> atualizarDisciplina(@PathVariable Long id, @RequestBody DisciplinaDTO disciplinaDTO) {
         DisciplinaDTO disciplinaAtualizada = DisciplinaMapper.toDTO(disciplinaService.atualizarDisciplina(id, DisciplinaMapper.toEntity(disciplinaDTO)));
         return disciplinaAtualizada != null ? ResponseEntity.ok(disciplinaAtualizada) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('PROFESSOR')")
-    public ResponseEntity<Void> deletarDisciplina(@PathVariable Integer id) {
+    public ResponseEntity<Void> deletarDisciplina(@PathVariable Long id) {
         boolean deletado = disciplinaService.deletarDisciplina(id);
         return deletado ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }

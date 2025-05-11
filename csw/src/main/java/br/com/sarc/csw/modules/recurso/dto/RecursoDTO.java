@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class RecursoDTO {
-    private Integer id;
+    private Long id;
     private StatusRecurso status; 
     private TipoRecursoDTO tipoRecurso;
 

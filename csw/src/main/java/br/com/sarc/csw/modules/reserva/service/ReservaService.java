@@ -18,7 +18,7 @@ public class ReservaService {
         return reservaRepository.findAll();
     }
 
-    public Reserva obterPorId(Integer id) {
+    public Reserva obterPorId(Long id) {
         Optional<Reserva> reserva = reservaRepository.findById(id);
         return reserva.orElse(null);
     }
@@ -27,7 +27,7 @@ public class ReservaService {
         return reservaRepository.save(reserva);
     }
 
-    public Reserva atualizar(Integer id, Reserva reservaAtualizada) {
+    public Reserva atualizar(Long id, Reserva reservaAtualizada) {
         if (reservaRepository.existsById(id)) {
             reservaAtualizada.setId(id);
             return reservaRepository.save(reservaAtualizada);
@@ -35,7 +35,7 @@ public class ReservaService {
         return null;
     }
 
-    public boolean deletar(Integer id) {
+    public boolean deletar(Long id) {
         if (reservaRepository.existsById(id)) {
             reservaRepository.deleteById(id);
             return true;

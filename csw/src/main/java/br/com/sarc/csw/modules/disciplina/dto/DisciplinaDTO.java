@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class DisciplinaDTO {
-    private Integer id;
+    private Long id;
     private String codigo;
     private String nome;
     private Integer creditos;

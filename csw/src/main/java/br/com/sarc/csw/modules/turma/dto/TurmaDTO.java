@@ -1,21 +1,18 @@
 package br.com.sarc.csw.modules.turma.dto;
 
-import br.com.sarc.csw.modules.disciplina.dto.DisciplinaDTO;
-import br.com.sarc.csw.modules.user.dto.UserDTO;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
-@AllArgsConstructor
 public class TurmaDTO {
-    private Integer id;
+    private Long id;
     private String numero;
-    private DisciplinaDTO disciplina;
     private String semestre;
-    private UserDTO professor;
+    private Long disciplinaId;
+    private UUID professorId;
     private String horario;
     private Integer vagas;
-    private List<UserDTO> alunos;
+    private List<UUID> alunosIds;
 }

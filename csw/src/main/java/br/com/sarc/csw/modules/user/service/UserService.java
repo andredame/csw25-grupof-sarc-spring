@@ -2,6 +2,9 @@ package br.com.sarc.csw.modules.user.service;
 import br.com.sarc.csw.modules.user.model.User;
 import br.com.sarc.csw.modules.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,7 +13,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public User getUserById(String id) {
+    public User getUserById(UUID id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found: " + id));
     }

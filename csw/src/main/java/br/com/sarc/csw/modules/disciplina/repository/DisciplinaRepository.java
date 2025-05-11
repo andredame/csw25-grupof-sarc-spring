@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import br.com.sarc.csw.modules.disciplina.model.Disciplina;
 
 @Repository
-public interface DisciplinaRepository extends JpaRepository<Disciplina, Integer> {
+public interface DisciplinaRepository extends JpaRepository<Disciplina, Long> {
     
 
     
