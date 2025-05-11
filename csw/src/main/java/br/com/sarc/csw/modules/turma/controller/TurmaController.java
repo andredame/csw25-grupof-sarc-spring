@@ -24,7 +24,6 @@ public class TurmaController {
     @Autowired
     private  TurmaService turmaService;
 
-    // Listar todas as turmas de um professor
     @GetMapping("/professor/{professorId}")
     @PreAuthorize("hasRole('PROFESSOR')")
     public ResponseEntity<List<TurmaDTO>> listarTurmasPorProfessor(@PathVariable UUID professorId) {
@@ -49,5 +48,12 @@ public class TurmaController {
     public ResponseEntity<TurmaDTO> atualizarTurma(@PathVariable Long id, @RequestBody TurmaDTO turmaDTO) {
         Turma turmaAtualizada = turmaService.atualizarTurma(id, TurmaMapper.toEntity(turmaDTO));
         return turmaAtualizada != null ? ResponseEntity.ok(TurmaMapper.toDTO(turmaAtualizada)) : ResponseEntity.notFound().build();
+    }
+    // Criar uma nova turma (somente coordenadores)
+    @PostMapping
+    @PreAuthorize("hasRole('COORDENADOR')")
+    public ResponseEntity<TurmaDTO> criarTurma(@RequestBody TurmaDTO turmaDTO) {
+        Turma novaTurma = turmaService.criarTurma(TurmaMapper.toEntity(turmaDTO));
+        return ResponseEntity.ok(TurmaMapper.toDTO(novaTurma));
     }
 }

@@ -29,4 +29,13 @@ public class TurmaService {
         }
         return null;
     }
+    public void deletarTurma(Long id) {
+        turmaRepository.deleteById(id);
+    }
+    public List<Turma> listarTurmas() {
+        return turmaRepository.findAll();
+    }
+    public Turma criarTurma(Turma turma) {
+        return turmaRepository.save(turma);
+    }
 }
