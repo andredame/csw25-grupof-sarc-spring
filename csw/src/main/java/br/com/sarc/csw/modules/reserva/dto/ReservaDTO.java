@@ -1,6 +1,5 @@
 package br.com.sarc.csw.modules.reserva.dto;
 
-import br.com.sarc.csw.modules.aula.dto.AulaDTO;
 import br.com.sarc.csw.modules.recurso.dto.RecursoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;

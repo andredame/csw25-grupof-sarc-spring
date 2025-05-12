@@ -16,9 +16,24 @@ public class TurmaMapper {
         dto.setSemestre(turma.getSemestre());
         dto.setHorario(turma.getHorario());
         dto.setVagas(turma.getVagas());
-        dto.setDisciplinaId(turma.getDisciplina().getId());
-        dto.setProfessorId(turma.getProfessor().getId());
-        dto.setAlunosIds(turma.getAlunos().stream().map(User::getId).collect(Collectors.toList()));
+
+        // Verifica se a disciplina não é nula antes de acessar o ID
+        if (turma.getDisciplina() != null) {
+            dto.setDisciplinaId(turma.getDisciplina().getId());
+        } else {
+            dto.setDisciplinaId(null); // Ou um valor padrão, se necessário
+        }
+
+        if (turma.getProfessor() != null) {
+            dto.setProfessorId(turma.getProfessor().getId());
+        }
+
+        dto.setAlunosIds(
+            turma.getAlunos() != null
+                ? turma.getAlunos().stream().map(User::getId).collect(Collectors.toList())
+                : null
+        );
+
         return dto;
     }
 

@@ -14,6 +14,8 @@ import br.com.sarc.csw.modules.user.model.User;
 public interface TurmaRepository extends JpaRepository<Turma, Long> {
     List<Turma> findByProfessorId(UUID professorId);
 
+    boolean existsByIdAndProfessorId(Long turmaId, UUID professorId);
+
     
     
     

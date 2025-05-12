@@ -36,13 +36,12 @@ INSERT INTO sala (nome, capacidade, andar, predio_id) VALUES
 ('Sala 301', 20, '3º Andar', 3);
 
 -- Inserindo dados na tabela 'aula'
-INSERT INTO aula ( turma_id, data, sala_id) VALUES 
-( 1, '2025-05-11', 1),
-( 2, '2025-05-12', 2),
-( 3, '2025-05-13', 3),
-( 4, '2025-05-14', 4),
-( 5, '2025-05-15', 5);
-
+INSERT INTO aula ( turma_id, data, sala_id,descricao) VALUES 
+( 1, '2025-05-11', 1, 'Aula de Introdução à Computação'),
+( 2, '2025-05-12', 2, 'Aula de Estruturas de Dados'),
+( 3, '2025-05-13', 3, 'Aula de Banco de Dados'),
+( 4, '2025-05-14', 4, 'Aula de Engenharia de Software'),
+( 5, '2025-05-15', 5, 'Aula de Redes de Computadores');
 -- Inserindo dados na tabela 'recurso'
 -- Inserindo dados na tabela 'tipo_recurso'
 INSERT INTO tipo_recurso (nome) VALUES 
