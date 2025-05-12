@@ -1,19 +1,30 @@
 package br.com.sarc.csw.modules.aula.controller;
 
-import br.com.sarc.csw.modules.aula.dto.AulaRequestDTO;
-import br.com.sarc.csw.modules.aula.dto.AulaResponseDTO;
-import br.com.sarc.csw.modules.aula.dto.AulaMapper;
-import br.com.sarc.csw.modules.aula.model.Aula;
-import br.com.sarc.csw.modules.aula.service.AulaService;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import br.com.sarc.csw.modules.aula.dto.AulaMapper;
+import br.com.sarc.csw.modules.aula.dto.AulaRequestDTO;
+import br.com.sarc.csw.modules.aula.dto.AulaResponseDTO;
+import br.com.sarc.csw.modules.aula.model.Aula;
+import br.com.sarc.csw.modules.aula.service.AulaService;
 
 @RestController
 @RequestMapping("/api/aulas")
+
 public class AulaController {
 
     @Autowired
@@ -21,6 +32,7 @@ public class AulaController {
 
     // Endpoint para criar uma nova aula
     @PostMapping
+    @PreAuthorize("hasRole('PROFESSOR')")
     public ResponseEntity<AulaResponseDTO> criarAula(@RequestBody AulaRequestDTO aulaRequestDTO) {
         Aula aula = AulaMapper.toEntity(aulaRequestDTO);
         Aula aulaCriada = aulaService.salvar(aula);
@@ -28,8 +40,19 @@ public class AulaController {
         return ResponseEntity.ok(responseDTO);
     }
 
+    @GetMapping("/professor/{professorId}")
+    @PreAuthorize("hasRole('PROFESSOR')")
+    public ResponseEntity<List<AulaResponseDTO>> listarAulasPorProfessor(@PathVariable UUID professorId) {
+        List<Aula> aulas = aulaService.listarAulasPorProfessor(professorId);
+        List<AulaResponseDTO> responseDTOs = aulas.stream()
+                .map(AulaMapper::toResponseDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responseDTOs);
+    }
+
     // Endpoint para buscar todas as aulas
     @GetMapping
+    @PreAuthorize("hasRole('PROFESSOR')")
     public ResponseEntity<List<AulaResponseDTO>> listarAulas() {
         List<Aula> aulas = aulaService.buscarTodas();
         List<AulaResponseDTO> responseDTOs = aulas.stream()
@@ -38,7 +61,19 @@ public class AulaController {
         return ResponseEntity.ok(responseDTOs);
     }
 
-    // Endpoint para buscar uma aula por ID
+    //Endpoint para buscar todas as aulas de uma Turma
+    @GetMapping("/turma/{turmaId}")
+    @PreAuthorize("hasRole('PROFESSOR')")
+    public ResponseEntity<List<AulaResponseDTO>> listarAulasPorTurma(@PathVariable Long turmaId) {
+        List<Aula> aulas = aulaService.listarAulasPorTurma(turmaId);
+        List<AulaResponseDTO> responseDTOs = aulas.stream()
+                .map(AulaMapper::toResponseDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responseDTOs);
+    }
+
+    
+
     @GetMapping("/{id}")
     public ResponseEntity<AulaResponseDTO> buscarAulaPorId(@PathVariable Long id) {
         Aula aula = aulaService.buscarPorId(id);
@@ -49,7 +84,6 @@ public class AulaController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    // Endpoint para atualizar uma aula
     @PutMapping("/{id}")
     public ResponseEntity<AulaResponseDTO> atualizarAula(
             @PathVariable Long id,

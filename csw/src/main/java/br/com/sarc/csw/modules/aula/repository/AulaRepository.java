@@ -12,6 +12,9 @@ public interface AulaRepository extends JpaRepository<Aula, Long> {
     // Aqui você pode adicionar métodos personalizados, se necessário
     // Exemplo: List<Aula> findByProfessorId(Long professorId);
     List<Aula> findByTurmaIdAndTurmaProfessorId(Long turmaId, UUID professorId);
+
+    List<Aula> findByTurmaProfessorId(UUID professorId);
+    List<Aula> findByTurmaId(Long turmaId);
 }
     
 

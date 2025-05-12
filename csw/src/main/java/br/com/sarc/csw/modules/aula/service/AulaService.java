@@ -21,6 +21,9 @@ public class AulaService {
     public List<Aula> listarAulasPorTurmaEProfessor(Long turmaId, UUID professorId) {
         return aulaRepository.findByTurmaIdAndTurmaProfessorId(turmaId, professorId);
     }
+    public List<Aula> listarAulasPorTurma(Long turmaId) {
+        return aulaRepository.findByTurmaId(turmaId);
+    }
 
     public Aula criarAula(Long turmaId, UUID professorId, Aula aula) {
         // Verifica se a turma pertence ao professor
@@ -70,6 +73,10 @@ public class AulaService {
     }
     public void deletar(Long id) {
         aulaRepository.deleteById(id);
+    }
+
+    public List<Aula> listarAulasPorProfessor(UUID professorId) {
+        return aulaRepository.findByTurmaProfessorId(professorId);
     }
 
 
