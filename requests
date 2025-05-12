@@ -265,6 +265,80 @@
 			]
 		},
 		{
+			"name": "Aulas",
+			"item": [
+				{
+					"name": "criar aula",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDcwMTUyMDUsImlhdCI6MTc0NzAxNDkwNSwianRpIjoiZjNiM2JmNjgtMGJiMi00Nzk4LWI2ZmEtMjUzNzZmNWQ4NzhlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImZlMThhNjkxLWU3ZjAtNGM1Yy05NjRmLTI3MzM4MmEzNDU5OCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiMGRjM2RkYjgtNTU1NS00YmNhLTlhZWYtNjJhMmNlYThmMGJiIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJQUk9GRVNTT1IiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjBkYzNkZGI4LTU1NTUtNGJjYS05YWVmLTYyYTJjZWE4ZjBiYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqb2huIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIiwiZW1haWwiOiJqb2huQGVkdS5wdWNycy5iciJ9.GrOVa8bJBcGEK2paEIQztouNoEHrcihQ4sIY7BN77WSzE119u69k3e3Fr4p7lMGo4TuaYaXwh7tMJ3D6vqt1vHunxv0ifPvt_F09MzUFmm_NvJ_Bp_PFNnh0i1hJSKKcJZh_er-igDKYn9N9pjjRKRTqxWH_pSwWnBSekJeDMQbpUUYbCn6CHinWxVsknLulQEDGZqAhaT4EVsnqOFDrtbmkIU44QVv_MPKrcKpfXidHnI8i99JWM_dY8JSTtb6e4XLMGdWoRxioqMJdD__Mp4K6qobENenH0oMyFhgvjCn5kB_AZ_fPdqTi4HsAvPZHOtrX4jDBAP1PW7YneTspYg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": \"2025-05-11\",\r\n  \"descricao\": \"Aula de Matemática\",\r\n  \"turmaId\": 1,\r\n  \"salaId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/aulas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"aulas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get aulas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDcwMTUyMDUsImlhdCI6MTc0NzAxNDkwNSwianRpIjoiZjNiM2JmNjgtMGJiMi00Nzk4LWI2ZmEtMjUzNzZmNWQ4NzhlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImZlMThhNjkxLWU3ZjAtNGM1Yy05NjRmLTI3MzM4MmEzNDU5OCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiMGRjM2RkYjgtNTU1NS00YmNhLTlhZWYtNjJhMmNlYThmMGJiIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJQUk9GRVNTT1IiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjBkYzNkZGI4LTU1NTUtNGJjYS05YWVmLTYyYTJjZWE4ZjBiYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqb2huIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIiwiZW1haWwiOiJqb2huQGVkdS5wdWNycy5iciJ9.GrOVa8bJBcGEK2paEIQztouNoEHrcihQ4sIY7BN77WSzE119u69k3e3Fr4p7lMGo4TuaYaXwh7tMJ3D6vqt1vHunxv0ifPvt_F09MzUFmm_NvJ_Bp_PFNnh0i1hJSKKcJZh_er-igDKYn9N9pjjRKRTqxWH_pSwWnBSekJeDMQbpUUYbCn6CHinWxVsknLulQEDGZqAhaT4EVsnqOFDrtbmkIU44QVv_MPKrcKpfXidHnI8i99JWM_dY8JSTtb6e4XLMGdWoRxioqMJdD__Mp4K6qobENenH0oMyFhgvjCn5kB_AZ_fPdqTi4HsAvPZHOtrX4jDBAP1PW7YneTspYg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/aulas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"aulas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "get user",
 			"request": {
 				"auth": {
