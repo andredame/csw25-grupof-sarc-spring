@@ -1,11 +1,12 @@
 package br.com.sarc.csw.modules.user.service;
+
 import br.com.sarc.csw.modules.user.model.User;
 import br.com.sarc.csw.modules.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-
-import java.util.UUID;
-
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -15,11 +16,29 @@ public class UserService {
 
     public User getUserById(UUID id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found: " + id));
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado: " + id));
     }
 
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found: " + username));
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User createUser(User user) {
+        // Adicione validações, se necessário (ex.: verificar email único)
+        return userRepository.save(user);
+    }
+
+    public User updateUser(User user) {
+        if (!userRepository.existsById(user.getId())) {
+            throw new RuntimeException("Usuário não encontrado: " + user.getId());
+        }
+        return userRepository.save(user);
+    }
+
+    public void deleteUser(UUID id) {
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("Usuário não encontrado: " + id);
+        }
+        userRepository.deleteById(id);
     }
 }

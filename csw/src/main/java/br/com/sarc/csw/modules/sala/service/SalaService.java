@@ -19,7 +19,8 @@ public class SalaService {
     private PredioRepository predioRepository;
 
     public Sala adicionarSala(Long predioId, Sala sala) {
-        Predio predio = predioRepository.findById(predioId).orElseThrow(() -> new RuntimeException("Prédio não encontrado"));
+        Predio predio = predioRepository.findById(predioId)
+                .orElseThrow(() -> new RuntimeException("Prédio não encontrado"));
         sala.setPredio(predio);
         return salaRepository.save(sala);
     }
@@ -37,5 +38,26 @@ public class SalaService {
 
     public List<Sala> listarSalasPorPredio(Long predioId) {
         return salaRepository.findByPredioId(predioId);
+    }
+
+    public Sala buscarSalaPorId(Long predioId, Long salaId) {
+        Sala sala = salaRepository.findById(salaId).orElse(null);
+        if (sala != null && sala.getPredio().getId().equals(predioId)) {
+            return sala;
+        }
+        return null;
+    }
+
+    public boolean deletarSala(Long predioId, Long salaId) {
+        Sala sala = salaRepository.findById(salaId).orElse(null);
+        if (sala != null && sala.getPredio().getId().equals(predioId)) {
+            salaRepository.delete(sala);
+            return true;
+        }
+        return false;
+    }
+
+    public List<Sala> filtrarPorCapacidade(Long predioId, int capacidadeMinima) {
+        return salaRepository.findByPredioIdAndCapacidadeGreaterThanEqual(predioId, capacidadeMinima);
     }
 }

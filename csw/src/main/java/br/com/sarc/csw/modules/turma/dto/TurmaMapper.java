@@ -4,7 +4,6 @@ import br.com.sarc.csw.modules.turma.model.Turma;
 import br.com.sarc.csw.modules.user.model.User;
 import br.com.sarc.csw.modules.disciplina.model.Disciplina;
 
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class TurmaMapper {
