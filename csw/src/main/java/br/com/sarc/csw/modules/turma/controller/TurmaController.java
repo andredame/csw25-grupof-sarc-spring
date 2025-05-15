@@ -25,6 +25,9 @@ public class TurmaController {
     @PreAuthorize("hasRole('PROFESSOR')")
     public ResponseEntity<List<TurmaDTO>> listarTurmasPorProfessor(@PathVariable UUID professorId) {
         List<Turma> turmas = turmaService.listarTurmasPorProfessor(professorId);
+        if (turmas.isEmpty()) {
+            throw new IllegalArgumentException("Nenhuma turma encontrada para o professor fornecido.");
+        }
         List<TurmaDTO> turmasDTO = turmas.stream()
                 .map(TurmaMapper::toDTO)
                 .collect(Collectors.toList());
@@ -35,6 +38,9 @@ public class TurmaController {
     @PreAuthorize("hasRole('ADMIN') or hasRole('COORDENADOR')")
     public ResponseEntity<List<TurmaDTO>> listarTodasTurmas() {
         List<Turma> turmas = turmaService.listarTodasTurmas();
+        if (turmas.isEmpty()) {
+            throw new IllegalArgumentException("Nenhuma turma encontrada.");
+        }
         List<TurmaDTO> turmasDTO = turmas.stream()
                 .map(TurmaMapper::toDTO)
                 .collect(Collectors.toList());
@@ -45,14 +51,20 @@ public class TurmaController {
     @PreAuthorize("hasRole('PROFESSOR')")
     public ResponseEntity<TurmaDTO> obterTurma(@PathVariable Long id) {
         Turma turma = turmaService.obterPorId(id);
-        return turma != null ? ResponseEntity.ok(TurmaMapper.toDTO(turma)) : ResponseEntity.notFound().build();
+        if (turma == null) {
+            throw new IllegalArgumentException("Turma não encontrada para o ID fornecido.");
+        }
+        return ResponseEntity.ok(TurmaMapper.toDTO(turma));
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('COORDENADOR')")
     public ResponseEntity<TurmaDTO> atualizarTurma(@PathVariable Long id, @RequestBody TurmaDTO turmaDTO) {
         Turma turmaAtualizada = turmaService.atualizarTurma(id, TurmaMapper.toEntity(turmaDTO));
-        return turmaAtualizada != null ? ResponseEntity.ok(TurmaMapper.toDTO(turmaAtualizada)) : ResponseEntity.notFound().build();
+        if (turmaAtualizada == null) {
+            throw new IllegalArgumentException("Turma não encontrada para o ID fornecido.");
+        }
+        return ResponseEntity.ok(TurmaMapper.toDTO(turmaAtualizada));
     }
 
     @PostMapping
