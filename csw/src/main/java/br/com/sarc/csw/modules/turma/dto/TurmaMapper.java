@@ -27,10 +27,12 @@ public class TurmaMapper {
             dto.setProfessorId(turma.getProfessor().getId());
         }
 
-        dto.setAlunosIds(
-            turma.getAlunos() != null
-                ? turma.getAlunos().stream().map(User::getId).collect(Collectors.toList())
-                : null
+        dto.setAlunos(
+        turma.getAlunos() != null
+            ? turma.getAlunos().stream()
+                .map(aluno -> new AlunoResponseDTO(aluno.getId(), aluno.getUsername(), aluno.getEmail()))
+                .collect(Collectors.toList())
+            : null
         );
 
         return dto;
@@ -53,14 +55,16 @@ public class TurmaMapper {
         turma.setProfessor(professor);
 
         turma.setAlunos(
-            dto.getAlunosIds() != null
-                ? dto.getAlunosIds().stream().map(id -> {
-                    User aluno = new User();
-                    aluno.setId(id);
-                    return aluno;
-                }).collect(Collectors.toList())
-                : null
-        );
+        dto.getAlunos() != null
+            ? dto.getAlunos().stream().map(alunoDTO -> {
+                User aluno = new User();
+                aluno.setId(alunoDTO.getId());
+                aluno.setUsername(alunoDTO.getUsername());
+                aluno.setEmail(alunoDTO.getEmail());
+                return aluno;
+            }).collect(Collectors.toList())
+            : null
+    );
 
         return turma;
     }

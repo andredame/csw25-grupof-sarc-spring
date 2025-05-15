@@ -33,6 +33,25 @@ spring:
   application:
     name: sarc
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    display-request-duration: true
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+    info:
+      title: Minha API Spring Boot
+      version: v1.0.0
+      description: Descrição da minha API.
+      contact:
+        name: Seu Nome
+        email: seuemail@example.com
+      license:
+        name: Apache 2.0
+        url: http://springdoc.org
+  writer:
+    default-produces-media-type: application/json
 
 logging:
   level:

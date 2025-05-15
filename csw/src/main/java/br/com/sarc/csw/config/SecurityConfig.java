@@ -24,7 +24,9 @@ public class SecurityConfig {
             "/v3/api-docs/**",
             "/swagger-resources",
             "/swagger-resources/**",
-            "/webjars/**" // Algumas versões do swagger podem precisar disso
+            "/webjars/**" ,
+            "/favicon.ico" // <- ADICIONE ESSA LINHA
+// Algumas versões do swagger podem precisar disso
     };
 
     @Bean

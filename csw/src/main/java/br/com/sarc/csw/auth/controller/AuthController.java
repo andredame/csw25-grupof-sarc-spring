@@ -32,17 +32,5 @@ public class AuthController {
         return ResponseEntity.ok(tokenResponse);
     }
 
-    // Endpoint para criar um usuário
-    @PostMapping("/users")
-    public ResponseEntity<String> createUser(@RequestBody UserRequest userRequest, @RequestHeader("Authorization") String token) {
-        authService.createUser(userRequest, token.replace("Bearer ", ""));
-        return ResponseEntity.ok("User created successfully");
-    }
-
-    // Endpoint para listar usuários
-    @GetMapping("/users")
-    public ResponseEntity<List<UserResponse>> getUsers(@RequestHeader("Authorization") String token, @RequestParam Optional<Boolean> enabled) {
-        List<UserResponse> users = authService.getUsers(token.replace("Bearer ", ""), enabled);
-        return ResponseEntity.ok(users);
-    }
+   
 }

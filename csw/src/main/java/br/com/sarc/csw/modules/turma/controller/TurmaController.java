@@ -38,15 +38,13 @@ public class TurmaController {
     @PreAuthorize("hasRole('PROFESSOR')")
     public ResponseEntity<List<TurmaResponseDTO>> listarTurmasPorProfessor(@PathVariable UUID professorId) {
         List<Turma> turmas = turmaService.listarTurmasPorProfessor(professorId);
-        List<TurmaResponseDTO> turmasDTO = turmas.stream()
-                .map(TurmaMapper::toResponseDTO)
         if (turmas.isEmpty()) {
             throw new IllegalArgumentException("Nenhuma turma encontrada para o professor fornecido.");
         }
-        List<TurmaDTO> turmasDTO = turmas.stream()
-                .map(TurmaMapper::toDTO)
+        List<TurmaResponseDTO> turmasResponseDTO = turmas.stream()
+                .map(TurmaMapper::toResponseDTO)
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(turmasDTO);
+        return ResponseEntity.ok(turmasResponseDTO);
     }
 
     @GetMapping
