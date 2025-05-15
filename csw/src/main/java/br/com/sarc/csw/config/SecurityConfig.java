@@ -7,41 +7,58 @@ import java.util.Map;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer; // Import para csrf
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class SecurityConfig {
 
     // Caminhos do Swagger/OpenAPI para permitir acesso
     private static final String[] SWAGGER_PATHS = {
-            "/swagger-ui.html",
-            "/swagger-ui/**",
-            "/v3/api-docs",
-            "/v3/api-docs/**",
-            "/swagger-resources",
-            "/swagger-resources/**",
-            "/webjars/**" ,
-            "/favicon.ico" // <- ADICIONE ESSA LINHA
-// Algumas versões do swagger podem precisar disso
+        "/swagger-ui.html",
+        "/swagger-ui/**",
+        "/v3/api-docs",
+        "/v3/api-docs/**",
+        "/swagger-resources",
+        "/swagger-resources/**",
+        "/webjars/**",
+        "/favicon.ico"
     };
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://meditamamente.com", "https://*.meditamamente.com"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(AbstractHttpConfigurer::disable) // Nova forma de desabilitar CSRF desde Spring Security 6.x
+            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Configuração de CORS
+            .csrf(AbstractHttpConfigurer::disable) // Desabilitar CSRF
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(SWAGGER_PATHS).permitAll() // Permitir acesso aos paths do Swagger
-                .requestMatchers("/public/**").permitAll()
-                .requestMatchers("/api/auth/login").permitAll()
-                .requestMatchers("/api/admin/**").hasRole("ADMIN") // Usando hasRole
-                .requestMatchers("/api/professor/**").hasRole("PROFESSOR") // Usando hasRole
-                .requestMatchers("/api/aluno/**").hasRole("ALUNO") // Usando hasRole
-                .requestMatchers("/api/coordenador/**").hasRole("COORDENADOR") // Usando hasRole
-                .anyRequest().authenticated()
+                .requestMatchers(SWAGGER_PATHS).permitAll() // Permitir acesso público ao Swagger
+                .requestMatchers("/public/**").permitAll() // Outras rotas públicas
+                .requestMatchers("/api/auth/login").permitAll() // Login público
+                .requestMatchers("/api/admin/**").hasRole("ADMIN") // Rotas para ADMIN
+                .requestMatchers("/api/professor/**").hasRole("PROFESSOR") // Rotas para PROFESSOR
+                .requestMatchers("/api/aluno/**").hasRole("ALUNO") // Rotas para ALUNO
+                .requestMatchers("/api/coordenador/**").hasRole("COORDENADOR") // Rotas para COORDENADOR
+                .anyRequest().authenticated() // Qualquer outra rota requer autenticação
             )
             .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
         return http.build();
