@@ -10,6 +10,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RecursoService {
 
@@ -18,8 +20,7 @@ public class RecursoService {
 
     public boolean verificarDisponibilidade(Long recursoId) {
         Recurso recurso = recursoRepository.findById(recursoId).orElse(null);
-        return recurso.getStatus() != null && recurso.getStatus() == StatusRecurso.DISPONIVEL;
-
+        return recurso != null && recurso.getStatus() == StatusRecurso.DISPONIVEL;
     }
 
     public void atualizarStatus(Long recursoId, String novoStatus) {

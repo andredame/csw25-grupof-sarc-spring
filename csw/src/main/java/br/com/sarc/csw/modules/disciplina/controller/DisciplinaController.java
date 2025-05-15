@@ -5,14 +5,7 @@ import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.sarc.csw.modules.disciplina.dto.DisciplinaDTO;
 import br.com.sarc.csw.modules.disciplina.dto.DisciplinaMapper;
@@ -41,8 +34,9 @@ public class DisciplinaController {
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('COORDENADOR')")
     public ResponseEntity<DisciplinaDTO> obterDisciplina(@PathVariable Long id) {
-        DisciplinaDTO disciplina = DisciplinaMapper.toDTO(disciplinaService.getDisciplina(id).orElse(null));
-        return disciplina != null ? ResponseEntity.ok(disciplina) : ResponseEntity.notFound().build();
+        return disciplinaService.getDisciplina(id)
+                .map(disciplina -> ResponseEntity.ok(DisciplinaMapper.toDTO(disciplina)))
+                .orElseThrow(() -> new IllegalArgumentException("Disciplina não encontrada para o ID fornecido."));
     }
 
     @PostMapping
@@ -55,14 +49,20 @@ public class DisciplinaController {
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('COORDENADOR')")
     public ResponseEntity<DisciplinaDTO> atualizarDisciplina(@PathVariable Long id, @RequestBody DisciplinaDTO disciplinaDTO) {
-        DisciplinaDTO disciplinaAtualizada = DisciplinaMapper.toDTO(disciplinaService.atualizarDisciplina(id, DisciplinaMapper.toEntity(disciplinaDTO)));
-        return disciplinaAtualizada != null ? ResponseEntity.ok(disciplinaAtualizada) : ResponseEntity.notFound().build();
+        var disciplinaAtualizada = disciplinaService.atualizarDisciplina(id, DisciplinaMapper.toEntity(disciplinaDTO));
+        if (disciplinaAtualizada == null) {
+            throw new IllegalArgumentException("Disciplina não encontrada para o ID fornecido.");
+        }
+        return ResponseEntity.ok(DisciplinaMapper.toDTO(disciplinaAtualizada));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('COORDENADOR')")
     public ResponseEntity<Void> deletarDisciplina(@PathVariable Long id) {
         boolean deletado = disciplinaService.deletarDisciplina(id);
-        return deletado ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        if (!deletado) {
+            throw new IllegalArgumentException("Disciplina não encontrada para o ID fornecido.");
+        }
+        return ResponseEntity.noContent().build();
     }
 }

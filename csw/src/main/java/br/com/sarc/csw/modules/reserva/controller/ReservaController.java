@@ -9,14 +9,12 @@ import br.com.sarc.csw.core.exception.MensagemErroDTO;
 import br.com.sarc.csw.core.exception.RecursoIndisponivelException;
 import br.com.sarc.csw.modules.recurso.service.RecursoService;
 
-import org.springdoc.api.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -35,7 +33,7 @@ public class ReservaController {
     public ResponseEntity<ReservaDTO> criarReserva(@RequestBody @Valid ReservaDTO reservaDTO) {
         // Verifica se o recurso está disponível
         boolean recursoDisponivel = recursoService.verificarDisponibilidade(reservaDTO.getId_recurso());
-       if (!recursoDisponivel) {
+        if (!recursoDisponivel) {
             throw new RecursoIndisponivelException("Recurso não está disponível para reserva.");
         }
 
@@ -54,7 +52,7 @@ public class ReservaController {
         Reserva reserva = ReservaMapper.toEntity(reservaDTO);
         Reserva reservaAtualizada = reservaService.atualizar(id, reserva);
         if (reservaAtualizada == null) {
-            return ResponseEntity.notFound().build();
+            throw new IllegalArgumentException("Reserva não encontrada para o ID fornecido.");
         }
         return ResponseEntity.ok(ReservaMapper.toDTO(reservaAtualizada));
     }
@@ -74,7 +72,7 @@ public class ReservaController {
     public ResponseEntity<ReservaDTO> obterReserva(@PathVariable Long id) {
         Reserva reserva = reservaService.obterPorId(id);
         if (reserva == null) {
-            return ResponseEntity.notFound().build();
+            throw new IllegalArgumentException("Reserva não encontrada para o ID fornecido.");
         }
         return ResponseEntity.ok(ReservaMapper.toDTO(reserva));
     }
@@ -85,7 +83,7 @@ public class ReservaController {
     public ResponseEntity<Void> deletarReserva(@PathVariable Long id) {
         boolean deletado = reservaService.deletar(id);
         if (!deletado) {
-            return ResponseEntity.notFound().build();
+            throw new IllegalArgumentException("Reserva não encontrada para o ID fornecido.");
         }
         return ResponseEntity.noContent().build();
     }
