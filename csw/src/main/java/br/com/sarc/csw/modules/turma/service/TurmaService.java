@@ -70,4 +70,20 @@ public class TurmaService {
 
         return aluno;
     }
+   public Turma vincularProfessorATurma(Long turmaId, UUID professorId) {
+        Turma turma = turmaRepository.findById(turmaId).orElse(null);
+        User professor = userRepository.findById(professorId).orElse(null);
+
+        if (turma == null || professor == null) {
+            return null;
+        }
+
+        // Só altera se for diferente
+        if (turma.getProfessor() == null || !turma.getProfessor().getId().equals(professorId)) {
+            turma.setProfessor(professor);
+            turmaRepository.save(turma);
+        }
+
+        return turma;
+    }
 }

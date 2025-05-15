@@ -1,6 +1,8 @@
 package br.com.sarc.csw.modules.reserva.dto;
 
+import br.com.sarc.csw.modules.aula.dto.AulaMapper;
 import br.com.sarc.csw.modules.aula.model.Aula;
+import br.com.sarc.csw.modules.recurso.dto.RecursoMapper;
 import br.com.sarc.csw.modules.recurso.model.Recurso;
 import br.com.sarc.csw.modules.reserva.model.Reserva;
 
@@ -44,5 +46,14 @@ public class ReservaMapper {
         }
 
         return reserva;
+    }
+
+    public static ReservaResponseDTO toResponseDTO(Reserva reserva) {
+        if (reserva == null) return null;
+        return new ReservaResponseDTO(
+            reserva.getId(),
+            AulaMapper.toResponseDTO(reserva.getAula()),
+            RecursoMapper.toDTO(reserva.getRecurso())
+        );
     }
 }

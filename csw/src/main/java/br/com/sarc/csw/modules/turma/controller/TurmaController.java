@@ -116,5 +116,18 @@ public class TurmaController {
         AlunoResponseDTO responseDTO = UserMapper.toAlunoResponseDTO(alunoVinculado);
         return ResponseEntity.ok(responseDTO);
     }
+    //vincular professor a turma
+    @PostMapping("/{turmaId}/professores/{professorId}")
+    @PreAuthorize("hasRole('COORDENADOR')")
+    public ResponseEntity<TurmaResponseDTO> vincularProfessorATurma(@PathVariable Long turmaId, @PathVariable UUID professorId) {
+        Turma turmaVinculada = turmaService.vincularProfessorATurma(turmaId, professorId);
+
+        if (turmaVinculada == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        TurmaResponseDTO responseDTO = TurmaMapper.toResponseDTO(turmaVinculada);
+        return ResponseEntity.ok(responseDTO);
+    }
 
 }

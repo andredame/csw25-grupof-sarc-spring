@@ -1,18 +1,27 @@
 package br.com.sarc.csw.modules.reserva.service;
 
-import br.com.sarc.csw.modules.reserva.model.Reserva;
-import br.com.sarc.csw.modules.reserva.repository.ReservaRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import br.com.sarc.csw.core.enums.PeriodoAula;
+import br.com.sarc.csw.core.enums.StatusRecurso;
+import br.com.sarc.csw.modules.aula.model.Aula;
+import br.com.sarc.csw.modules.recurso.model.Recurso;
+import br.com.sarc.csw.modules.recurso.repository.RecursoRepository;
+import br.com.sarc.csw.modules.reserva.model.Reserva;
+import br.com.sarc.csw.modules.reserva.repository.ReservaRepository;
 
 @Service
 public class ReservaService {
 
     @Autowired
     private ReservaRepository reservaRepository;
+
+    @Autowired
+    private RecursoRepository recursoRepository;
 
     public List<Reserva> listarTodas() {
         return reservaRepository.findAll();
@@ -34,7 +43,27 @@ public class ReservaService {
         }
         return null;
     }
+    public boolean recursoDisponivelParaAula(Long recursoId, String data, PeriodoAula periodo) {
+        // Busca o recurso
+        Recurso recurso = recursoRepository.findById(recursoId).orElse(null);
+        if (recurso == null) {
+            throw new IllegalArgumentException("Recurso não encontrado");
+        }
+        if (recurso.getStatus() == StatusRecurso.EM_MANUTENCAO) {
+            throw new IllegalArgumentException("Recurso em manutenção");
+        }
 
+        // Busca todas as reservas desse recurso
+        List<Reserva> reservas = reservaRepository.findAllByRecursoId(recursoId);
+        for (Reserva reserva : reservas) {
+            Aula aula = reserva.getAula();
+            // Verifica se já existe reserva para o mesmo dia e período
+            if (aula.getData().equals(data) && aula.getPeriodo() == periodo) {
+                return false; // Conflito de horário
+            }
+        }
+        return true; // Disponível
+    }
     public boolean deletar(Long id) {
         if (reservaRepository.existsById(id)) {
             reservaRepository.deleteById(id);
