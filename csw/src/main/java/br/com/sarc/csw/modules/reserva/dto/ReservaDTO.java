@@ -1,6 +1,6 @@
 package br.com.sarc.csw.modules.reserva.dto;
 
-import br.com.sarc.csw.modules.recurso.dto.RecursoDTO;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReservaDTO {
 
+    @NotNull(message = "O ID do recurso é obrigatório")
     private Long id_recurso;
+
+    @NotNull(message = "O ID da aula é obrigatório")
     private Long id_aula;
 }

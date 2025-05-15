@@ -1,10 +1,13 @@
 package br.com.sarc.csw.modules.aula.model;
 
+import br.com.sarc.csw.core.enums.PeriodoAula;
 import br.com.sarc.csw.modules.disciplina.model.Disciplina;
 import br.com.sarc.csw.modules.sala.model.Sala;
 import br.com.sarc.csw.modules.turma.model.Turma;
 import br.com.sarc.csw.modules.user.model.User;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,6 +35,10 @@ public class Aula {
     @ManyToOne
     @JoinColumn(name = "sala_id", nullable = false)
     private Sala sala;
+
+    @Enumerated(EnumType.STRING)
+    private PeriodoAula periodo;
+
     
     
     private String descricao;

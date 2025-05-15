@@ -2,7 +2,11 @@ package br.com.sarc.csw.modules.turma.service;
 
 import br.com.sarc.csw.modules.turma.model.Turma;
 import br.com.sarc.csw.modules.turma.repository.TurmaRepository;
+import br.com.sarc.csw.modules.user.model.User;
+import br.com.sarc.csw.modules.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +15,9 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class TurmaService {
-
+    
+    @Autowired
+    private final UserRepository userRepository;
     private final TurmaRepository turmaRepository;
 
     public List<Turma> listarTurmasPorProfessor(UUID professorId) {
@@ -40,5 +46,28 @@ public class TurmaService {
 
     public void deletarTurma(Long id) {
         turmaRepository.deleteById(id);
+    }
+
+    public List<User> listarAlunosPorTurma(Long id) {
+        Turma turma = turmaRepository.findById(id).orElseThrow(() -> new RuntimeException("Turma não encontrada"));
+        return turma.getAlunos(); // Supondo que a entidade Turma tenha uma lista de alunos
+    }
+
+
+    public User vincularAlunoATurma(Long turmaId, UUID alunoId) {
+        Turma turma = turmaRepository.findById(turmaId).orElse(null);
+        User aluno = userRepository.findById(alunoId).orElse(null);
+
+        if (turma == null || aluno == null) {
+            return null;
+        }
+
+        // Evita duplicidade
+        if (!turma.getAlunos().contains(aluno)) {
+            turma.getAlunos().add(aluno);
+            turmaRepository.save(turma);
+        }
+
+        return aluno;
     }
 }

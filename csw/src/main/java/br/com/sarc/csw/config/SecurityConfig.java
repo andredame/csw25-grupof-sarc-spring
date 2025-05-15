@@ -21,7 +21,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable()) // Desabilita CSRF
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/public/**").permitAll()
+                .requestMatchers("/public/**", "/v3/api-docs/**","/swagger-ui/**","/swagger-ui.html").permitAll()
                 .requestMatchers("/api/auth/login").permitAll() 
                 .requestMatchers("/api/admin/**").hasAuthority("ADMIN") // Apenas usuários com ROLE_SADMIN
                 .requestMatchers("/api/professor/**").hasAuthority("PROFESSOR") // Apenas PROFESSOR

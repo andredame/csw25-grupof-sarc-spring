@@ -13,6 +13,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import lombok.Data;
 
 
@@ -37,9 +38,13 @@ public class Turma {
     @JoinColumn(name = "professor_id", nullable = false)
     private User professor;
 
+
+
     private String horario;
 
+    @Valid
     private Integer vagas;
+
 
     @ManyToMany
     @JoinTable(

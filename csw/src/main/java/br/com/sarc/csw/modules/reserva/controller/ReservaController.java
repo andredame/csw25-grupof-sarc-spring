@@ -4,6 +4,7 @@ import br.com.sarc.csw.modules.reserva.dto.ReservaDTO;
 import br.com.sarc.csw.modules.reserva.dto.ReservaMapper;
 import br.com.sarc.csw.modules.reserva.model.Reserva;
 import br.com.sarc.csw.modules.reserva.service.ReservaService;
+import jakarta.validation.Valid;
 import br.com.sarc.csw.core.exception.MensagemErroDTO;
 import br.com.sarc.csw.core.exception.RecursoIndisponivelException;
 import br.com.sarc.csw.modules.recurso.service.RecursoService;
@@ -31,7 +32,7 @@ public class ReservaController {
     // Criar uma nova reserva
     @PreAuthorize("hasRole('PROFESSOR')")
     @PostMapping
-    public ResponseEntity<ReservaDTO> criarReserva(@RequestBody ReservaDTO reservaDTO) {
+    public ResponseEntity<ReservaDTO> criarReserva(@RequestBody @Valid ReservaDTO reservaDTO) {
         // Verifica se o recurso está disponível
         boolean recursoDisponivel = recursoService.verificarDisponibilidade(reservaDTO.getId_recurso());
        if (!recursoDisponivel) {
@@ -49,7 +50,7 @@ public class ReservaController {
     // Atualizar uma reserva existente
     @PreAuthorize("hasRole('PROFESSOR')")
     @PutMapping("/{id}")
-    public ResponseEntity<ReservaDTO> atualizarReserva(@PathVariable Long id, @RequestBody ReservaDTO reservaDTO) {
+    public ResponseEntity<ReservaDTO> atualizarReserva(@PathVariable Long id, @RequestBody @Valid ReservaDTO reservaDTO) {
         Reserva reserva = ReservaMapper.toEntity(reservaDTO);
         Reserva reservaAtualizada = reservaService.atualizar(id, reserva);
         if (reservaAtualizada == null) {
@@ -68,7 +69,6 @@ public class ReservaController {
         return ResponseEntity.ok(reservasDTO);
     }
 
-    // Obter uma reserva específica
     @PreAuthorize("hasRole('PROFESSOR')")
     @GetMapping("/{id}")
     public ResponseEntity<ReservaDTO> obterReserva(@PathVariable Long id) {

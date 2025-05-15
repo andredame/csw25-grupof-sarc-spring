@@ -33,6 +33,10 @@ public class AulaService {
         return aulaRepository.save(aula);
     }
 
+    public List<Aula> listarAulasPorData(String data) {
+        return aulaRepository.findByData(data);
+    }
+
     public Aula atualizarAula(Long aulaId, Aula aulaAtualizada) {
         if (aulaRepository.existsById(aulaId)) {
             aulaAtualizada.setId(aulaId);

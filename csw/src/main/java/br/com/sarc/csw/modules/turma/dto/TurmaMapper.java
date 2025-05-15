@@ -1,8 +1,11 @@
 package br.com.sarc.csw.modules.turma.dto;
 
 import br.com.sarc.csw.modules.turma.model.Turma;
-import br.com.sarc.csw.modules.user.model.User;
+import br.com.sarc.csw.modules.user.dto.AlunoResponseDTO;
+import br.com.sarc.csw.modules.user.dto.UserMapper;
+import br.com.sarc.csw.modules.disciplina.dto.DisciplinaMapper;
 import br.com.sarc.csw.modules.disciplina.model.Disciplina;
+import br.com.sarc.csw.modules.user.model.User;
 
 import java.util.stream.Collectors;
 
@@ -16,11 +19,8 @@ public class TurmaMapper {
         dto.setHorario(turma.getHorario());
         dto.setVagas(turma.getVagas());
 
-        // Verifica se a disciplina não é nula antes de acessar o ID
         if (turma.getDisciplina() != null) {
             dto.setDisciplinaId(turma.getDisciplina().getId());
-        } else {
-            dto.setDisciplinaId(null); // Ou um valor padrão, se necessário
         }
 
         if (turma.getProfessor() != null) {
@@ -53,14 +53,32 @@ public class TurmaMapper {
         turma.setProfessor(professor);
 
         turma.setAlunos(
-            dto.getAlunosIds() != null ?
-            dto.getAlunosIds().stream().map(id -> {
-                User aluno = new User();
-                aluno.setId(id);
-                return aluno;
-            }).collect(Collectors.toList()) : null
+            dto.getAlunosIds() != null
+                ? dto.getAlunosIds().stream().map(id -> {
+                    User aluno = new User();
+                    aluno.setId(id);
+                    return aluno;
+                }).collect(Collectors.toList())
+                : null
         );
 
         return turma;
+    }
+
+    public static TurmaResponseDTO toResponseDTO(Turma turma) {
+        return new TurmaResponseDTO(
+            turma.getId(),
+            turma.getNumero(),
+            turma.getSemestre(),
+            turma.getDisciplina() != null ? DisciplinaMapper.toDTO(turma.getDisciplina()) : null,
+            turma.getProfessor() != null ? turma.getProfessor().getId() : null,
+            turma.getHorario(),
+            turma.getVagas(),
+            turma.getAlunos() != null
+                ? turma.getAlunos().stream()
+                    .map(aluno -> new AlunoResponseDTO(aluno.getId(),aluno.getUsername(),aluno.getEmail())) // Inclui ID e nome
+                    .collect(Collectors.toList())
+                : null
+        );
     }
 }

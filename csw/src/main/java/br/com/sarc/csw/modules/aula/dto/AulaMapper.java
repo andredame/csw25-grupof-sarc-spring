@@ -18,6 +18,7 @@ public class AulaMapper {
         Aula aula = new Aula();
         aula.setData(dto.getData());
         aula.setDescricao(dto.getDescricao());
+        aula.setPeriodo(dto.getPeriodo());
 
         if (dto.getTurmaId() != null) {
             Turma turma = new Turma();
@@ -51,7 +52,9 @@ public class AulaMapper {
             aula.getData(),
             aula.getDescricao(),
             turmaDTO,
-            salaDTO
+            salaDTO,
+                        aula.getPeriodo() // Inclui o período no DTO de resposta
+
         );
     }
 }

@@ -15,6 +15,7 @@ public interface AulaRepository extends JpaRepository<Aula, Long> {
 
     List<Aula> findByTurmaProfessorId(UUID professorId);
     List<Aula> findByTurmaId(Long turmaId);
+    List<Aula> findByData(String data);
 }
     
 

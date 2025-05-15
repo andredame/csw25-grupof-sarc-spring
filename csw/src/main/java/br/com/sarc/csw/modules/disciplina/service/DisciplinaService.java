@@ -6,8 +6,10 @@ import br.com.sarc.csw.modules.disciplina.dto.DisciplinaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class DisciplinaService {
@@ -42,4 +44,11 @@ public class DisciplinaService {
         }
         return false;
     }
+
+    // public Collection<DisciplinaDTO> listarDisciplinasPorProfessor(UUID idProfessor) {
+    //     return disciplinaRepository.findByProfessorId(idProfessor)
+    //             .stream()
+    //             .map(disciplina -> new DisciplinaDTO(disciplina.getId(), disciplina.getNome(), disciplina.getCargaHoraria(), disciplina.getProfessor().getId(), disciplina.getProfessor().getNome()))
+    //             .toList();
+    // }
 }

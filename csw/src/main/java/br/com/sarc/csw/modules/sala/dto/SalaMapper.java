@@ -14,13 +14,6 @@ public class SalaMapper {
         sala.setNome(dto.getNome());
         sala.setCapacidade(dto.getCapacidade());
         sala.setAndar(dto.getAndar());
-
-        if (dto.getPredioId() != null) {
-            Predio predio = new Predio();
-            predio.setId(dto.getPredioId());
-            sala.setPredio(predio);
-        }
-
         return sala;
     }
 
