@@ -4,6 +4,7 @@ import br.com.sarc.csw.modules.predio.dto.PredioDTO;
 import br.com.sarc.csw.modules.predio.dto.PredioMapper;
 import br.com.sarc.csw.modules.predio.model.Predio;
 import br.com.sarc.csw.modules.predio.service.PredioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/predios")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class PredioController {
 
     private final PredioService predioService;

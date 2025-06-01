@@ -4,6 +4,7 @@ import br.com.sarc.csw.modules.recurso.dto.RecursoDTO;
 import br.com.sarc.csw.modules.recurso.dto.RecursoMapper;
 import br.com.sarc.csw.modules.recurso.model.Recurso;
 import br.com.sarc.csw.modules.recurso.service.RecursoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/recursos")
+@SecurityRequirement(name = "bearerAuth")
 @RequiredArgsConstructor
 public class RecursoController {
 

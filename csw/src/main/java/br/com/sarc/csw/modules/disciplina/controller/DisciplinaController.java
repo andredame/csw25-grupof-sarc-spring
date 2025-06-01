@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import br.com.sarc.csw.modules.disciplina.dto.DisciplinaDTO;
 import br.com.sarc.csw.modules.disciplina.dto.DisciplinaMapper;
 import br.com.sarc.csw.modules.disciplina.service.DisciplinaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/disciplinas")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class DisciplinaController {
 
     private final DisciplinaService disciplinaService;

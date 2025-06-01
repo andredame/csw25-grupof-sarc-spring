@@ -1,0 +1,690 @@
+{
+	"info": {
+		"_postman_id": "c485ed01-e074-4235-9f4c-d1573f462142",
+		"name": "csw",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36581899"
+	},
+	"item": [
+		{
+			"name": "get token",
+			"item": [
+				{
+					"name": "Coordenador login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"mariaeduarda@edu.pucrs.br\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Professor login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"mariaeduarda@edu.pucrs.br\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"mariaeduarda@edu.pucrs.br\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aluno login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"andresilva@edu.pucrs.br\",\r\n  \"password\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sala",
+			"item": [
+				{
+					"name": "Salas by predio",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDY5NzM5NjMsImlhdCI6MTc0Njk3MzY2MywianRpIjoiMGJkMzg0MjAtZTA0Ni00OGRkLWIyMjctZTc5NmM3NTEzYWIyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjgzZTc1NjU3LWRjMWEtNDY1Ni04NzlhLTI1NGU2OTg2MjYzOSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiMDM2ODU2ZTktZWJlMS00ZWM5LWI5NDUtZjcwODE0OTJiOTNlIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIkFETUlOIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiMDM2ODU2ZTktZWJlMS00ZWM5LWI5NDUtZjcwODE0OTJiOTNlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6ImVkZ2FyIGRvcyBzYW50b3MiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIiLCJlbWFpbCI6ImVkZ2FyZG9zc2FudG9zQGVkdS5wdWNycy5iciJ9.m1CXzH9r5MhT2iK6ntn2G2uOT6oJv1I5gS88lYHEuQeeFsA8MtFxCs0z0k6reyhXeO9irf3RE60R1G3XDQ2FHbYvdVxy5E77nOVUEW5j67ev-RYkWZ-5Dc-SBsHradbBWWKKMc0ocsnvpJOLijezfTSPdrucL6cT55jvHjHxjFnEb1Ps-Oz26GHIWflVv4VdYM5QH5X_IkUoHuyG1-MDnxP2XHO-WDJ-ibgS31ifUvIRpE0ChPBnRIuBKH6e8pnmJ6QUF5PnCVRU_g26-S-bHkkESD6yrFUCAWPB2NvSi5UOTKeK7d4mCj_Zgc6g4seQwhwEfHQd7GDqhRDuIymAdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Sala 101\",\r\n  \"capacidade\": 40,\r\n  \"andar\": \"1º Andar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/predios/1/salas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"predios",
+								"1",
+								"salas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/api/predios/1/salas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDcyMjg5MjQsImlhdCI6MTc0NzIyODYyNCwianRpIjoiYTFjYjQ3ZmUtMzlmYS00NThkLWE3NTItM2EzMDA3NDQ5OGNlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjNlMTExZTg3LWJkMTQtNDkxOC05NTk0LTFhZjlmNDQzN2IwYiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiZjg1NTBiYWYtYjc0Ny00ZTE3LWI2NGEtNDI0Y2RhOTExODU0IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwiQ09PUkRFTkFET1IiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiZjg1NTBiYWYtYjc0Ny00ZTE3LWI2NGEtNDI0Y2RhOTExODU0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6Im1hcmlhIGVkdWFyZGEiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIiLCJlbWFpbCI6Im1hcmlhZWR1YXJkYUBlZHUucHVjcnMuYnIifQ.YUdawojNWhVFLw4hVEVV-mPXyD_eOWlRuFeSwE-eEUfN_wwtJ93tJ3M00VAl__NRTiofqe9onmBqvpswdRYAmenMDb9ddui3FuCfI9wN9SWeZLLgG8wAKqrKb6F5ArG23NqFnis6EKvRzExznYK9Hza3Px7BsFYFtTNtsAt2EYOleAN72S4zwXb9lDGCuQqlxi_-cyfIbjG3o6dYsVINO6J-jCJ4cN-7Jh-lvkVAeXH03aR2huirRkkXxQP1TVIW1PthEKMT19qy9iUjdAqEDKXj3BIEHBsOylAFcvuVa3S15j8oqOeJ7zJHPqKV-Io9Y6yLdxnFQL142vq5aIqcuw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Sala 105\",\r\n  \"capacidade\": 40,\r\n  \"predioId\":2,\r\n  \"andar\": \"1º Andar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/predios/1/salas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"predios",
+								"1",
+								"salas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservas",
+			"item": [
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "criar reserva",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDY5ODgwNTAsImlhdCI6MTc0Njk4Nzc1MCwianRpIjoiMzk4OTVmYWEtMDBkOS00YTJiLWE3YTQtNTA2YTU2NTM2YTM2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImZlMThhNjkxLWU3ZjAtNGM1Yy05NjRmLTI3MzM4MmEzNDU5OCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiZWMxZmI0YzItMmY1My00NmQ5LTlmMjctMWQ3YjdiYzlhYTFiIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJQUk9GRVNTT1IiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImVjMWZiNGMyLTJmNTMtNDZkOS05ZjI3LTFkN2I3YmM5YWExYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqb2huIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIiwiZW1haWwiOiJqb2huQGVkdS5wdWNycy5iciJ9.sCPHql05Ec6iN9o-9sQGwXG7TFd5fsskW3_QmdmftUbH8EoC12DAs5soqUnxsB02m5oUUOxAbozU8gvmuJKc77u7Xp-4oEd2emaKeqTOO1MMfeo3aY6FRpSTa_GSNjJON0rnQHC7MxDSqLiLQJOW1P9-bHoWpIwy7JkI5c9P_yo3b9pCEdhd0PxyBHgyDHmtVBYkPEAUwvBqIAivjH7bEzHlQ5580-XjsBEOazOF73RI-SP9Ls5VqmD7gbG7Nh9UiXopOnEoM4uElnWZPIwiMWZqwMw6RaOunFHUcjBfs4obj0Euf_RybRWGeI24cv9l28Sd-goOAT8Y4IoIJIzeJQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id_aula\": 1,\r\n  \"id_recurso\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/reservas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"reservas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TODAS",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Aulas",
+			"item": [
+				{
+					"name": "criar aula",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDcwMTUyMDUsImlhdCI6MTc0NzAxNDkwNSwianRpIjoiZjNiM2JmNjgtMGJiMi00Nzk4LWI2ZmEtMjUzNzZmNWQ4NzhlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImZlMThhNjkxLWU3ZjAtNGM1Yy05NjRmLTI3MzM4MmEzNDU5OCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiMGRjM2RkYjgtNTU1NS00YmNhLTlhZWYtNjJhMmNlYThmMGJiIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJQUk9GRVNTT1IiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjBkYzNkZGI4LTU1NTUtNGJjYS05YWVmLTYyYTJjZWE4ZjBiYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqb2huIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIiwiZW1haWwiOiJqb2huQGVkdS5wdWNycy5iciJ9.GrOVa8bJBcGEK2paEIQztouNoEHrcihQ4sIY7BN77WSzE119u69k3e3Fr4p7lMGo4TuaYaXwh7tMJ3D6vqt1vHunxv0ifPvt_F09MzUFmm_NvJ_Bp_PFNnh0i1hJSKKcJZh_er-igDKYn9N9pjjRKRTqxWH_pSwWnBSekJeDMQbpUUYbCn6CHinWxVsknLulQEDGZqAhaT4EVsnqOFDrtbmkIU44QVv_MPKrcKpfXidHnI8i99JWM_dY8JSTtb6e4XLMGdWoRxioqMJdD__Mp4K6qobENenH0oMyFhgvjCn5kB_AZ_fPdqTi4HsAvPZHOtrX4jDBAP1PW7YneTspYg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": \"2025-05-11\",\r\n  \"descricao\": \"Aula de Matemática\",\r\n  \"turmaId\": 1,\r\n  \"salaId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/aulas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"aulas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get aulas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDcwMTUyMDUsImlhdCI6MTc0NzAxNDkwNSwianRpIjoiZjNiM2JmNjgtMGJiMi00Nzk4LWI2ZmEtMjUzNzZmNWQ4NzhlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImZlMThhNjkxLWU3ZjAtNGM1Yy05NjRmLTI3MzM4MmEzNDU5OCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiMGRjM2RkYjgtNTU1NS00YmNhLTlhZWYtNjJhMmNlYThmMGJiIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJQUk9GRVNTT1IiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjBkYzNkZGI4LTU1NTUtNGJjYS05YWVmLTYyYTJjZWE4ZjBiYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqb2huIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIiwiZW1haWwiOiJqb2huQGVkdS5wdWNycy5iciJ9.GrOVa8bJBcGEK2paEIQztouNoEHrcihQ4sIY7BN77WSzE119u69k3e3Fr4p7lMGo4TuaYaXwh7tMJ3D6vqt1vHunxv0ifPvt_F09MzUFmm_NvJ_Bp_PFNnh0i1hJSKKcJZh_er-igDKYn9N9pjjRKRTqxWH_pSwWnBSekJeDMQbpUUYbCn6CHinWxVsknLulQEDGZqAhaT4EVsnqOFDrtbmkIU44QVv_MPKrcKpfXidHnI8i99JWM_dY8JSTtb6e4XLMGdWoRxioqMJdD__Mp4K6qobENenH0oMyFhgvjCn5kB_AZ_fPdqTi4HsAvPZHOtrX4jDBAP1PW7YneTspYg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/aulas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"aulas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alterar sala",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDczMTY3NTEsImlhdCI6MTc0NzMxNjQ1MSwianRpIjoiOWYxMjI2NmUtZTQxNC00YTE5LTg0YmEtN2MzMjY2ZjM2N2Q1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImZlMThhNjkxLWU3ZjAtNGM1Yy05NjRmLTI3MzM4MmEzNDU5OCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiZTA3MGQ5MGUtYTQwNC00ZDhlLTk4Y2UtMTVhYTFkNWRjOWQ4IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJQUk9GRVNTT1IiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImUwNzBkOTBlLWE0MDQtNGQ4ZS05OGNlLTE1YWExZDVkYzlkOCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqb2huIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIiwiZW1haWwiOiJqb2huQGVkdS5wdWNycy5iciJ9.FLjLxBn1u1vpefKzWXxS94NxYoGX4xQK_kUvFFTBsP_2lREALPi3cXqhuTCkWysS271YrMklzgDAZULjPwluVnjT0Qcq3_FCQBvRxJ3iHkd8KbxtmT_LLBfUjdB4hG47tEqe31kaSnbSgtB9UeL_DMHVX_O00AVHHNpI_ovLKhCF4AWQlKCxbSYU6CoRleqt4CqSR--UL-os8EPGRO0GYbup1bGKyVgI8vNrN4u2f-HeC9clWMLVZwKirxw8pFQrK4cxlNDNVhO33MpI8B2s-yugfW6Zs44XuJfyHN6TeQOz4T9sUEYKDhnkdivhNpn4xr--qMiuYa2CFAbPlT7PQQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/aulas/1/sala?novaSalaId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"aulas",
+								"1",
+								"sala"
+							],
+							"query": [
+								{
+									"key": "novaSalaId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Turmas",
+			"item": [
+				{
+					"name": "todas turmas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDcyMzM5MjIsImlhdCI6MTc0NzIzMzYyMiwianRpIjoiYmI5NjlmODEtZmFjNy00M2YwLTk3ZGMtNzZhNmU3OTY3YmM2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjNlMTExZTg3LWJkMTQtNDkxOC05NTk0LTFhZjlmNDQzN2IwYiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiNzYwYzg0MmItODVkZS00ZDM3LWEwNDUtYWEyYzAyOGQ4MzAwIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwiQ09PUkRFTkFET1IiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiNzYwYzg0MmItODVkZS00ZDM3LWEwNDUtYWEyYzAyOGQ4MzAwIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6Im1hcmlhIGVkdWFyZGEiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIiLCJlbWFpbCI6Im1hcmlhZWR1YXJkYUBlZHUucHVjcnMuYnIifQ.Pd1w3dah5Wvv-J7OGWYlD0e0bucztGyPCV0vYtrI1ECMYZie7-6CfUPc_A6Df9WsQQ5Cr87JS8KYGb2J_bVqBba_gLLZksdGc6xWZAJhOfWkXDFd8Itt1kMuikqUIeeRDBCV_t_5g3mqx0WA-vArVkagcbd5qL52N_ehJ3fKE4wbUnYnX53L_1TXQ9DAQhz03loGD6jKeDAeIxHmKzzzvuLHM0IJ8H7EUR39TO_NCO7v83AIVDGLJ5_TLv7KM7yUcEqQAnNOL35POrqO8mtSfSK-VjOGGKOjun2ZTa3QJwv-PqvGnpO91_WqCjiR0bSpqHxrFrASbgSbAZ4l_I0MBg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/turmas\n",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"turmas\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/turmas/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"turmas",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Turma de Matemática\",\r\n  \"descricao\": \"Turma para o semestre 2023/2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/turmas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"turmas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "listar turmas por professor",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "vincular aluno a turma",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDcyMzM3MzMsImlhdCI6MTc0NzIzMzQzMywianRpIjoiMmNiMzAyN2QtZDE3ZS00MGY1LWEwMzctNjRmMWE2Y2U5YWJkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjNlMTExZTg3LWJkMTQtNDkxOC05NTk0LTFhZjlmNDQzN2IwYiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiMjk2YzZlYTktNjY0ZS00MDUzLWE3MTEtZjk0NmFhZmFiZjc0IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwiQ09PUkRFTkFET1IiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiMjk2YzZlYTktNjY0ZS00MDUzLWE3MTEtZjk0NmFhZmFiZjc0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6Im1hcmlhIGVkdWFyZGEiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIiLCJlbWFpbCI6Im1hcmlhZWR1YXJkYUBlZHUucHVjcnMuYnIifQ.PeuGW5E03w1DBywbbgr5OQQ4UCVU0vdAb7zQcqdHuMAErn9dhqG0Y_sDAuFAO2KCD4yU5gMCURq14xQJQ0bkU4QecZymwCTEFSsHLF3I7RLmED9NqibYceddE-sKvAZKcoe_VRQIJdUinyvJ_YS19-73nNyj0atCGjxe6onAHw_qFEYX6t_AG48nq9orhq_CLnUA4UbAKti6iq35TSnUW9TtEANL1nDElrVG1U6Dj0ysYIORD7MW0d6WT54IoWd3OeQE2uBAADYRHVVgoWwyHzFdYSlFpbO4hgiBMvM_bIOyecd-29r04GsWhHWtRar9uTmmSZnVVaciNJ-wCGeKIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/turmas/1/alunos/{{aluno_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"turmas",
+								"1",
+								"alunos",
+								"{{aluno_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "predios",
+			"item": [
+				{
+					"name": "todos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDcxNzYxMzYsImlhdCI6MTc0NzE3NTgzNiwianRpIjoiZGNjYjRkMzEtYTc1Yy00ZmZkLWIwMjEtMDdlZjYxZDlhOGUyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjgzZTc1NjU3LWRjMWEtNDY1Ni04NzlhLTI1NGU2OTg2MjYzOSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiNDA1ZjlkMGEtZTczNi00YTA2LWI5MGItNDIyOWVhNDljNmM3IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIkFETUlOIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiNDA1ZjlkMGEtZTczNi00YTA2LWI5MGItNDIyOWVhNDljNmM3IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6ImVkZ2FyIGRvcyBzYW50b3MiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIiLCJlbWFpbCI6ImVkZ2FyZG9zc2FudG9zQGVkdS5wdWNycy5iciJ9.P60Dou8yuaYTUgoLWAacD5nPg1o8wd_SaAZ_UN2QUkxQp38v2zk7hBw9-YLDQUzVIsYCwJMYWj9zAlFBZlKLoUEFACfXAwUkPG4J8pXAdddZmSJxmTfedPnVAM2N4z6ZIxrG6UNUeT19b4t7mh0DN6BXIAvgN2i-6vL8WllDA1etRyb3Bmr3bxCYeK2oWB8833tDSQw9fBh7TSNWrUaAHK57iadODmtl-Fh9GVGJTunjfdFpvKPccPtk9D-wiKX-w8p184r9RxDmB5MV_rk-vUz7awM2eLpErc2Gr_VYAKdGP85Snn7eO1Hz5UU9g1o9kPoLlOPTFVEnl0pAxu15bQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"johndoe\",\r\n  \"password\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/predios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"predios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDcxNzYxMzYsImlhdCI6MTc0NzE3NTgzNiwianRpIjoiZGNjYjRkMzEtYTc1Yy00ZmZkLWIwMjEtMDdlZjYxZDlhOGUyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjgzZTc1NjU3LWRjMWEtNDY1Ni04NzlhLTI1NGU2OTg2MjYzOSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiNDA1ZjlkMGEtZTczNi00YTA2LWI5MGItNDIyOWVhNDljNmM3IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIkFETUlOIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiNDA1ZjlkMGEtZTczNi00YTA2LWI5MGItNDIyOWVhNDljNmM3IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6ImVkZ2FyIGRvcyBzYW50b3MiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIiLCJlbWFpbCI6ImVkZ2FyZG9zc2FudG9zQGVkdS5wdWNycy5iciJ9.P60Dou8yuaYTUgoLWAacD5nPg1o8wd_SaAZ_UN2QUkxQp38v2zk7hBw9-YLDQUzVIsYCwJMYWj9zAlFBZlKLoUEFACfXAwUkPG4J8pXAdddZmSJxmTfedPnVAM2N4z6ZIxrG6UNUeT19b4t7mh0DN6BXIAvgN2i-6vL8WllDA1etRyb3Bmr3bxCYeK2oWB8833tDSQw9fBh7TSNWrUaAHK57iadODmtl-Fh9GVGJTunjfdFpvKPccPtk9D-wiKX-w8p184r9RxDmB5MV_rk-vUz7awM2eLpErc2Gr_VYAKdGP85Snn7eO1Hz5UU9g1o9kPoLlOPTFVEnl0pAxu15bQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/predios/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"predios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJLZlUzcUE4MlY1bnFEanpTNS16cE5TYUtZMzlvM2tlVWVocFFadXRxTGE0In0.eyJleHAiOjE3NDcxNzYxMzYsImlhdCI6MTc0NzE3NTgzNiwianRpIjoiZGNjYjRkMzEtYTc1Yy00ZmZkLWIwMjEtMDdlZjYxZDlhOGUyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYXJjIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjgzZTc1NjU3LWRjMWEtNDY1Ni04NzlhLTI1NGU2OTg2MjYzOSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiNDA1ZjlkMGEtZTczNi00YTA2LWI5MGItNDIyOWVhNDljNmM3IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1zYXJjIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIkFETUlOIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiNDA1ZjlkMGEtZTczNi00YTA2LWI5MGItNDIyOWVhNDljNmM3IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6ImVkZ2FyIGRvcyBzYW50b3MiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIiLCJlbWFpbCI6ImVkZ2FyZG9zc2FudG9zQGVkdS5wdWNycy5iciJ9.P60Dou8yuaYTUgoLWAacD5nPg1o8wd_SaAZ_UN2QUkxQp38v2zk7hBw9-YLDQUzVIsYCwJMYWj9zAlFBZlKLoUEFACfXAwUkPG4J8pXAdddZmSJxmTfedPnVAM2N4z6ZIxrG6UNUeT19b4t7mh0DN6BXIAvgN2i-6vL8WllDA1etRyb3Bmr3bxCYeK2oWB8833tDSQw9fBh7TSNWrUaAHK57iadODmtl-Fh9GVGJTunjfdFpvKPccPtk9D-wiKX-w8p184r9RxDmB5MV_rk-vUz7awM2eLpErc2Gr_VYAKdGP85Snn7eO1Hz5UU9g1o9kPoLlOPTFVEnl0pAxu15bQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Prédio Central\",\r\n    \"rua\": \"Rua Principal\",\r\n    \"numero\": \"123\",\r\n    \"complemento\": \"Bloco A\",\r\n    \"bairro\": \"Centro\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"uf\": \"SP\",\r\n    \"cep\": \"01000-000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/predios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"predios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar predio",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "get user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"johndoe\",\r\n  \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

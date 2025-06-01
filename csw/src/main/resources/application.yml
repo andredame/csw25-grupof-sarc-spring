@@ -56,3 +56,5 @@ springdoc:
 logging:
   level:
     org.springframework.security: DEBUG
+    org.springdoc: DEBUG
+    '[org.springdoc.core]': DEBUG

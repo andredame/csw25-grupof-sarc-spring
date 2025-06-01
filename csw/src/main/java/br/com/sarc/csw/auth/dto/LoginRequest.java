@@ -8,11 +8,11 @@ import jakarta.validation.constraints.NotBlank;
 @Data
 public class LoginRequest {
 
-    @Schema(description = "Username (e-mail)", example = "admin@pucrs.br", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Username (e-mail)", example = "john@edu.pucrs.br", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
     private String username;
 
-    @Schema(description = "User password", example = "a12345678", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "User password", example = "123456", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank
     private String password;
 }

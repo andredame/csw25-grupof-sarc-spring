@@ -23,6 +23,7 @@ import br.com.sarc.csw.modules.turma.service.TurmaService;
 import br.com.sarc.csw.modules.user.dto.AlunoResponseDTO;
 import br.com.sarc.csw.modules.user.dto.UserMapper;
 import br.com.sarc.csw.modules.user.model.User;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/turmas")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class TurmaController {
 
     private final TurmaService turmaService;

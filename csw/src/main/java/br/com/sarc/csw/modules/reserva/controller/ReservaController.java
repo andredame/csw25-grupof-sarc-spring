@@ -24,10 +24,12 @@ import br.com.sarc.csw.modules.reserva.dto.ReservaMapper;
 import br.com.sarc.csw.modules.reserva.dto.ReservaResponseDTO;
 import br.com.sarc.csw.modules.reserva.model.Reserva;
 import br.com.sarc.csw.modules.reserva.service.ReservaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/reservas")
+@SecurityRequirement(name = "bearerAuth")
 public class ReservaController {
 
     @Autowired
@@ -38,12 +40,13 @@ public class ReservaController {
 
     @PostMapping
     @PreAuthorize("hasRole('PROFESSOR')")
-    public ResponseEntity<ReservaResponseDTO> criarReserva(@RequestBody @Valid ReservaDTO reservaDTO) {
+    public ResponseEntity<ReservaResponseDTO> criarReserva(@RequestBody ReservaDTO reservaDTO) {
         Aula aula = aulaService.buscarPorId(reservaDTO.getId_aula());
         if (!reservaService.recursoDisponivelParaAula(reservaDTO.getId_recurso(), aula.getData(), aula.getPeriodo())) {
             throw new RecursoIndisponivelException("Recurso já reservado para esse horário.");
         }
         Reserva reserva = ReservaMapper.toEntity(reservaDTO);
+
         Reserva novaReserva = reservaService.criar(reserva);
         return ResponseEntity.ok(ReservaMapper.toResponseDTO(novaReserva));
     }

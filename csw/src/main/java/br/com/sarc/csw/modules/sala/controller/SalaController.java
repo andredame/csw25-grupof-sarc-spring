@@ -5,6 +5,7 @@ import br.com.sarc.csw.modules.sala.dto.SalaResponseDTO;
 import br.com.sarc.csw.modules.sala.dto.SalaMapper;
 import br.com.sarc.csw.modules.sala.model.Sala;
 import br.com.sarc.csw.modules.sala.service.SalaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/predios/{predioId}/salas")
+@SecurityRequirement(name = "bearerAuth")
 public class SalaController {
 
     @Autowired

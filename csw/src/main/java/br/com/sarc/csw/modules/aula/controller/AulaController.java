@@ -24,11 +24,12 @@ import br.com.sarc.csw.modules.aula.dto.AulaRequestDTO;
 import br.com.sarc.csw.modules.aula.dto.AulaResponseDTO;
 import br.com.sarc.csw.modules.aula.model.Aula;
 import br.com.sarc.csw.modules.aula.service.AulaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/aulas")
-
+@SecurityRequirement(name = "bearerAuth")
 public class AulaController {
 
     @Autowired

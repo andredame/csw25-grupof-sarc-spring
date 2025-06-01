@@ -52,6 +52,8 @@ public class ReservaService {
         if (recurso.getStatus() == StatusRecurso.EM_MANUTENCAO) {
             throw new IllegalArgumentException("Recurso em manutenção");
         }
+        
+        
 
         // Busca todas as reservas desse recurso
         List<Reserva> reservas = reservaRepository.findAllByRecursoId(recursoId);

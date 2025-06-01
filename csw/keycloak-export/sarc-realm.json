@@ -451,6 +451,45 @@
     "notBefore" : 0,
     "groups" : [ ]
   }, {
+    "id" : "7799d77f-3286-4364-a83b-c797a32de6e9",
+    "createdTimestamp" : 1747316950599,
+    "username" : "eduardo@edu.pucrs.br",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "eduardo",
+    "lastName" : "",
+    "email" : "eduardo@edu.pucrs.br",
+    "credentials" : [ ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "ALUNO", "default-roles-sarc" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "55ba0910-db17-4763-bf2a-9978e09e2835",
+    "createdTimestamp" : 1747316902371,
+    "username" : "gabriel@edu.pucrs.br",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "gabriel",
+    "lastName" : "",
+    "email" : "gabriel@edu.pucrs.br",
+    "credentials" : [ {
+      "id" : "499c9029-6fb4-4d40-bd85-f4458fbc9889",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1747316916103,
+      "secretData" : "{\"value\":\"s5wcuDqOK3pUI5Oy4SK5ZwuqyPachRAI8A9yruqAMGc=\",\"salt\":\"t9f56ehuiK595Q2Kbf2xFA==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "ALUNO", "default-roles-sarc" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
     "id" : "fe18a691-e7f0-4c5c-964f-273382a34598",
     "createdTimestamp" : 1746827256177,
     "username" : "john",
@@ -494,6 +533,52 @@
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
     "realmRoles" : [ "COORDENADOR", "default-roles-sarc" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "0c13c1a7-8dbe-447f-bd1c-2ae0e7a931fc",
+    "createdTimestamp" : 1747317150379,
+    "username" : "roberto@edu.pucrs.br",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "roberto",
+    "lastName" : "",
+    "email" : "roberto@edu.pucrs.br",
+    "credentials" : [ {
+      "id" : "04f53c49-6492-4611-be3e-5185afa2aca0",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1747317189080,
+      "secretData" : "{\"value\":\"fTIgQfjXJABLvSUqeMaEI4IPH8H47n/z2Z9Lf8fN5JE=\",\"salt\":\"X6NGcjw3SElpiEX5VTgGlQ==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-sarc", "PROFESSOR" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "300de63f-b5f4-499f-aeb0-b8d23eeea80b",
+    "createdTimestamp" : 1747316996707,
+    "username" : "vitor@edu.pucrs.br",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "vitor",
+    "lastName" : "",
+    "email" : "vitor@edu.pucrs.br",
+    "credentials" : [ {
+      "id" : "9128df3c-e6a3-435e-8601-1bbd08a58062",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1747317013959,
+      "secretData" : "{\"value\":\"seN4eK8UIMIg1IcJTlD68Lak1WgA5M2Y+OHJUVRmpvA=\",\"salt\":\"CHWpu/jYF/F2loOi9Oe9Xg==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "ALUNO", "default-roles-sarc" ],
     "notBefore" : 0,
     "groups" : [ ]
   } ],
