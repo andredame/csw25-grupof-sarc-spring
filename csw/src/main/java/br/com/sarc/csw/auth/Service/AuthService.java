@@ -1,4 +1,4 @@
-package br.com.sarc.csw.auth.Service;
+package br.com.sarc.csw.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
