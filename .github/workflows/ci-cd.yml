@@ -31,9 +31,11 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean package
+        working-directory: csw
 
       - name: Run tests
         run: mvn test
+        working-directory: csw
 
   deploy:
     needs: build-and-test
