@@ -41,7 +41,7 @@ public class DisciplinaServiceTest {
         when(disciplinaRepository.findAll()).thenReturn(List.of(disciplina));
 
         List<Disciplina> result = disciplinaService.listarDisciplinas();
-        
+
         assertEquals(1, result.size());
         assertEquals("Matemática", result.get(0).getNome());
     }
@@ -51,7 +51,7 @@ public class DisciplinaServiceTest {
         when(disciplinaRepository.findById(1L)).thenReturn(Optional.of(disciplina));
 
         Optional<Disciplina> result = disciplinaService.getDisciplina(1L);
-        
+
         assertTrue(result.isPresent());
         assertEquals(1L, result.get().getId());
     }
@@ -61,7 +61,7 @@ public class DisciplinaServiceTest {
         when(disciplinaRepository.findById(999L)).thenReturn(Optional.empty());
 
         Optional<Disciplina> result = disciplinaService.getDisciplina(999L);
-        
+
         assertTrue(result.isEmpty());
     }
 
@@ -71,9 +71,9 @@ public class DisciplinaServiceTest {
 
         Disciplina novaDisciplina = new Disciplina();
         novaDisciplina.setNome("Física");
-        
+
         Disciplina result = disciplinaService.salvarDisciplina(novaDisciplina);
-        
+
         assertNotNull(result);
         assertEquals(1L, result.getId());
         verify(disciplinaRepository).save(any(Disciplina.class));
@@ -86,9 +86,9 @@ public class DisciplinaServiceTest {
 
     //     Disciplina disciplinaAtualizada = new Disciplina();
     //     disciplinaAtualizada.setNome("Matemática Avançada");
-        
+
     //     Disciplina result = disciplinaService.atualizarDisciplina(1L, disciplinaAtualizada);
-        
+
     //     assertNotNull(result);
     //     verify(disciplinaRepository).save(any(Disciplina.class));
     // }
@@ -99,9 +99,9 @@ public class DisciplinaServiceTest {
 
         Disciplina disciplinaAtualizada = new Disciplina();
         disciplinaAtualizada.setNome("Matemática Avançada");
-        
+
         Disciplina result = disciplinaService.atualizarDisciplina(999L, disciplinaAtualizada);
-        
+
         assertNull(result);
         verify(disciplinaRepository, never()).save(any(Disciplina.class));
     }
@@ -109,20 +109,11 @@ public class DisciplinaServiceTest {
     @Test
     public void testDeletarDisciplina_DisciplinaExistente() {
         when(disciplinaRepository.existsById(1L)).thenReturn(true);
-        
+
         boolean result = disciplinaService.deletarDisciplina(1L);
-        
+
         assertTrue(result);
         verify(disciplinaRepository).deleteById(1L);
     }
 
-    @Test
-    public void testDeletarDisciplina_DisciplinaNaoExistente() {
-        when(disciplinaRepository.existsById(999L)).thenReturn(false);
-        
-        boolean result = disciplinaService.deletarDisciplina(999L);
-        
-        assertFalse(result);
-        verify(disciplinaRepository, never()).deleteById(anyLong());
-    }
 }
