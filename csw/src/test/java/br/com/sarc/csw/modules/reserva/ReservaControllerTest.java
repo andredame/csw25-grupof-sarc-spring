@@ -72,8 +72,8 @@ public class ReservaControllerTest {
         reserva.setRecurso(recurso);
 
         reservaDTO = new ReservaDTO();
-        reservaDTO.setIdAula(10L);
-        reservaDTO.setIdRecurso(5L);
+        reservaDTO.setId_aula(10L);
+        reservaDTO.setId_recurso(5L);
     }
 
  
