@@ -93,7 +93,7 @@ public class DisciplinaServiceTest {
     //     verify(disciplinaRepository).save(any(Disciplina.class));
     // }
 
-   
+
 
     @Test
     public void testDeletarDisciplina_DisciplinaExistente() {
@@ -102,7 +102,7 @@ public class DisciplinaServiceTest {
         boolean result = disciplinaService.deletarDisciplina(1L);
 
         assertTrue(result);
-        verify(disciplinaRepository).deleteById(1L);
+        verify(disciplinaRepository).deleteById(1L);//
     }
 
 }
