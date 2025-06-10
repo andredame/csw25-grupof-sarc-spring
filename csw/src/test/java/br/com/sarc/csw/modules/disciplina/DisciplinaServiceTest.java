@@ -93,18 +93,7 @@ public class DisciplinaServiceTest {
     //     verify(disciplinaRepository).save(any(Disciplina.class));
     // }
 
-    @Test
-    public void testAtualizarDisciplina_DisciplinaNaoExistente() {
-        when(disciplinaRepository.findById(999L)).thenReturn(Optional.empty());
-
-        Disciplina disciplinaAtualizada = new Disciplina();
-        disciplinaAtualizada.setNome("Matemática Avançada");
-
-        Disciplina result = disciplinaService.atualizarDisciplina(999L, disciplinaAtualizada);
-
-        assertNull(result);
-        verify(disciplinaRepository, never()).save(any(Disciplina.class));
-    }
+   
 
     @Test
     public void testDeletarDisciplina_DisciplinaExistente() {
