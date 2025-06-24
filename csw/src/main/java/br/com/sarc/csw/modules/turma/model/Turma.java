@@ -5,6 +5,7 @@ import java.util.List;
 import br.com.sarc.csw.modules.disciplina.model.Disciplina;
 import br.com.sarc.csw.modules.user.model.User;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,10 +29,9 @@ public class Turma {
 
     private String numero;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER) // Adicione fetch = FetchType.EAGER
     @JoinColumn(name = "disciplina_id", nullable = false)
     private Disciplina disciplina;
-
     private String semestre;
 
     @ManyToOne

@@ -1,19 +1,13 @@
 package br.com.sarc.csw.modules.disciplina.repository;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
+import br.com.sarc.csw.modules.disciplina.model.Disciplina;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import br.com.sarc.csw.modules.disciplina.model.Disciplina;
+
+import java.util.Optional;
 
 @Repository
 public interface DisciplinaRepository extends JpaRepository<Disciplina, Long> {
-
-
-    Optional<Disciplina> findById(Long id);
-    
-
-    
+    // Adicionar este método para verificar a unicidade do código
+    Optional<Disciplina> findByCodigo(String codigo);
 }

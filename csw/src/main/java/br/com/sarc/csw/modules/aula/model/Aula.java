@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.time.LocalDate; // Import LocalDate
 
 @Entity
 @Table(name = "aula")
@@ -30,7 +31,7 @@ public class Aula {
     @JoinColumn(name = "turma_id", nullable = false)
     private Turma turma;
 
-    private String data;
+    private LocalDate data; // Changed from String to LocalDate
 
     @ManyToOne
     @JoinColumn(name = "sala_id", nullable = false)
@@ -39,7 +40,5 @@ public class Aula {
     @Enumerated(EnumType.STRING)
     private PeriodoAula periodo;
 
-    
-    
     private String descricao;
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.List;
 import java.util.UUID;
 
+import br.com.sarc.csw.modules.disciplina.dto.DisciplinaDTO;
 import br.com.sarc.csw.modules.user.dto.AlunoResponseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
@@ -21,9 +22,7 @@ public class TurmaDTO {
     @NotBlank(message = "O semestre é obrigatório")
     private String semestre;
 
-    @Schema(description = "ID da sala", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "O ID da disciplina é obrigatório")
-    private Long disciplinaId;
+    private DisciplinaDTO disciplina; 
 
     @Schema(description = "UUID do professor", example = "fe18a691-e7f0-4c5c-964f-273382a34598", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "O ID do professor é obrigatório")

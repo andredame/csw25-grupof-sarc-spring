@@ -1,5 +1,6 @@
 package br.com.sarc.csw.modules.turma.service;
 
+import br.com.sarc.csw.modules.disciplina.repository.DisciplinaRepository;
 import br.com.sarc.csw.modules.turma.model.Turma;
 import br.com.sarc.csw.modules.turma.repository.TurmaRepository;
 import br.com.sarc.csw.modules.user.model.User;
@@ -15,10 +16,14 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class TurmaService {
-    
+
     @Autowired
     private final UserRepository userRepository;
-    private final TurmaRepository turmaRepository;
+    @Autowired // Removed 'final' for @Autowired field, as @RequiredArgsConstructor injects final fields
+    private TurmaRepository turmaRepository;
+    @Autowired
+    private DisciplinaRepository disciplinaRepository; // Injetar DisciplinaRepository
+
 
     public List<Turma> listarTurmasPorProfessor(UUID professorId) {
         return turmaRepository.findByProfessorId(professorId);
@@ -33,15 +38,38 @@ public class TurmaService {
     }
 
     public Turma criarTurma(Turma turma) {
+        // Validação: Garantir que a disciplina associada existe
+        if (turma.getDisciplina() == null || !disciplinaRepository.existsById(turma.getDisciplina().getId())) {
+            throw new IllegalArgumentException("Disciplina associada à turma não encontrada.");
+        }
+        // Validação: Garantir que o professor associado existe
+        if (turma.getProfessor() == null || !userRepository.existsById(turma.getProfessor().getId())) {
+            throw new IllegalArgumentException("Professor associado à turma não encontrado.");
+        }
         return turmaRepository.save(turma);
     }
 
-    public Turma atualizarTurma(Long id, Turma turma) {
-        if (turmaRepository.existsById(id)) {
-            turma.setId(id);
-            return turmaRepository.save(turma);
-        }
-        return null;
+    public Turma atualizarTurma(Long id, Turma turmaAtualizada) {
+        return turmaRepository.findById(id).map(turmaExistente -> {
+            // Validação: Garantir que a disciplina associada existe, se for atualizada
+            if (turmaAtualizada.getDisciplina() == null || !disciplinaRepository.existsById(turmaAtualizada.getDisciplina().getId())) {
+                throw new IllegalArgumentException("Disciplina associada à turma não encontrada.");
+            }
+            // Validação: Garantir que o professor associado existe, se for atualizado
+            if (turmaAtualizada.getProfessor() == null || !userRepository.existsById(turmaAtualizada.getProfessor().getId())) {
+                throw new IllegalArgumentException("Professor associado à turma não encontrado.");
+            }
+
+            turmaExistente.setNumero(turmaAtualizada.getNumero());
+            turmaExistente.setDisciplina(turmaAtualizada.getDisciplina());
+            turmaExistente.setSemestre(turmaAtualizada.getSemestre());
+            turmaExistente.setProfessor(turmaAtualizada.getProfessor());
+            turmaExistente.setHorario(turmaAtualizada.getHorario());
+            turmaExistente.setVagas(turmaAtualizada.getVagas());
+            // A lista de alunos deve ser atualizada por um método específico (vincularAlunoATurma/desvincular)
+            // turmaExistente.setAlunos(turmaAtualizada.getAlunos()); // CUIDADO: Evitar substituir a lista de alunos diretamente aqui para manter a lógica de vagas
+            return turmaRepository.save(turmaExistente);
+        }).orElseThrow(() -> new IllegalArgumentException("Turma não encontrada com o ID: " + id));
     }
 
     public void deletarTurma(Long id) {
@@ -49,39 +77,40 @@ public class TurmaService {
     }
 
     public List<User> listarAlunosPorTurma(Long id) {
-        Turma turma = turmaRepository.findById(id).orElseThrow(() -> new RuntimeException("Turma não encontrada"));
-        return turma.getAlunos(); // Supondo que a entidade Turma tenha uma lista de alunos
+        Turma turma = turmaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Turma não encontrada")); // Changed RuntimeException to IllegalArgumentException
+        return turma.getAlunos();
     }
 
 
     public User vincularAlunoATurma(Long turmaId, UUID alunoId) {
-        Turma turma = turmaRepository.findById(turmaId).orElse(null);
-        User aluno = userRepository.findById(alunoId).orElse(null);
+        Turma turma = turmaRepository.findById(turmaId).orElseThrow(() -> new IllegalArgumentException("Turma não encontrada."));
+        User aluno = userRepository.findById(alunoId).orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado."));
 
-        if (turma == null || aluno == null) {
-            return null;
+        // Validação: Checar se o aluno já está na turma
+        if (turma.getAlunos().contains(aluno)) {
+            throw new IllegalArgumentException("Aluno já está matriculado nesta turma.");
         }
 
-        // Evita duplicidade
-        if (!turma.getAlunos().contains(aluno)) {
-            turma.getAlunos().add(aluno);
-            turmaRepository.save(turma);
+        // Validação: Checar se há vagas disponíveis
+        if (turma.getVagas() != null && turma.getAlunos().size() >= turma.getVagas()) {
+            throw new IllegalStateException("Não há vagas disponíveis nesta turma.");
         }
 
+        turma.getAlunos().add(aluno);
+        turmaRepository.save(turma);
         return aluno;
     }
-   public Turma vincularProfessorATurma(Long turmaId, UUID professorId) {
-        Turma turma = turmaRepository.findById(turmaId).orElse(null);
-        User professor = userRepository.findById(professorId).orElse(null);
 
-        if (turma == null || professor == null) {
-            return null;
-        }
+    public Turma vincularProfessorATurma(Long turmaId, UUID professorId) {
+        Turma turma = turmaRepository.findById(turmaId).orElseThrow(() -> new IllegalArgumentException("Turma não encontrada."));
+        User professor = userRepository.findById(professorId).orElseThrow(() -> new IllegalArgumentException("Professor não encontrado."));
 
-        // Só altera se for diferente
+        // Validação: Só altera se for diferente
         if (turma.getProfessor() == null || !turma.getProfessor().getId().equals(professorId)) {
             turma.setProfessor(professor);
             turmaRepository.save(turma);
+        } else {
+            throw new IllegalArgumentException("O professor já está associado a esta turma.");
         }
 
         return turma;

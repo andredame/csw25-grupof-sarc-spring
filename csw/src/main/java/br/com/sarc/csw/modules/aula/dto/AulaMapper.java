@@ -1,7 +1,7 @@
 package br.com.sarc.csw.modules.aula.dto;
 
 import br.com.sarc.csw.modules.aula.model.Aula;
-import br.com.sarc.csw.modules.disciplina.model.Disciplina;
+// Removed unused import: import br.com.sarc.csw.modules.disciplina.model.Disciplina;
 import br.com.sarc.csw.modules.sala.dto.SalaMapper;
 import br.com.sarc.csw.modules.sala.dto.SalaResponseDTO;
 import br.com.sarc.csw.modules.sala.model.Sala;
@@ -16,18 +16,19 @@ public class AulaMapper {
         if (dto == null) return null;
 
         Aula aula = new Aula();
-        aula.setData(dto.getData());
+        aula.setData(dto.getData()); // Set LocalDate directly
         aula.setDescricao(dto.getDescricao());
         aula.setPeriodo(dto.getPeriodo());
 
         if (dto.getTurmaId() != null) {
             Turma turma = new Turma();
             turma.setId(dto.getTurmaId());
-            if (dto.getDisciplinaId() != null) {
-                Disciplina disciplina = new Disciplina();
-                disciplina.setId(dto.getDisciplinaId());
-                turma.setDisciplina(disciplina);
-            }
+            // Removed disciplinaId logic as it's no longer in AulaRequestDTO
+            // if (dto.getDisciplinaId() != null) {
+            //     Disciplina disciplina = new Disciplina();
+            //     disciplina.setId(dto.getDisciplinaId());
+            //     turma.setDisciplina(disciplina);
+            // }
             aula.setTurma(turma);
         }
 
@@ -49,12 +50,11 @@ public class AulaMapper {
 
         return new AulaResponseDTO(
             aula.getId(),
-            aula.getData(),
+            aula.getData(), // Get LocalDate directly
             aula.getDescricao(),
             turmaDTO,
             salaDTO,
-                        aula.getPeriodo() // Inclui o período no DTO de resposta
-
+            aula.getPeriodo()
         );
     }
 }
