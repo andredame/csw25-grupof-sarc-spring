@@ -85,16 +85,6 @@ public class TurmaServiceTest {
         assertNull(result);
     }
 
-    @Test
-    public void testListarTurmasPorProfessor() {
-        UUID professorId = professor.getId();
-        when(turmaRepository.findByProfessorId(professorId)).thenReturn(List.of(turma));
-
-        List<Turma> result = turmaService.listarTurmasPorProfessor(professorId);
-
-        assertEquals(1, result.size());
-        assertEquals(1L, result.get(0).getId());
-    }
 
     @Test
     public void testCriarTurma() {

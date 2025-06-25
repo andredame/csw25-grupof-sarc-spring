@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,7 +30,7 @@ public class ReservaController {
     @PreAuthorize("hasAnyRole('PROFESSOR', 'ALUNO', 'COORDENADOR', 'ADMIN')")
     public ResponseEntity<List<ReservaDTO>> listarTodasReservas() {
         try {
-            List<Reserva> reservas = reservaService.listarTodas();
+            List<Reserva> reservas = reservaService.listarTodasReservas();
             return ResponseEntity.ok(reservas.stream().map(ReservaMapper::toDTO).collect(Collectors.toList()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao listar reservas.", e);
@@ -66,6 +67,17 @@ public class ReservaController {
         }
     }
 
+    @GetMapping("/professor/{professorId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COORDENADOR') or (hasRole('PROFESSOR') and #professorId == principal.subject)")
+    public ResponseEntity<List<ReservaDTO>> listarReservasPorProfessor(@PathVariable UUID professorId) {
+        try {
+            List<Reserva> reservas = reservaService.listarReservasPorProfessor(professorId);
+            return ResponseEntity.ok(reservas.stream().map(ReservaMapper::toDTO).collect(Collectors.toList()));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao listar reservas do professor.", e);
+        }
+    }
+
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('PROFESSOR')")
     public ResponseEntity<ReservaDTO> atualizarReserva(@PathVariable Long id, @RequestBody @Valid ReservaDTO reservaDTO) {
@@ -98,4 +110,5 @@ public class ReservaController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao deletar reserva.", e);
         }
     }
+    
 }

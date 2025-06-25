@@ -191,11 +191,7 @@ public class AulaController {
             return ResponseEntity.notFound().build();
         }
         
-        // Optional: Verify if the professor attempting to delete is the owner of the class
-        // UUID professorId = getProfessorIdFromAuthentication(authentication);
-        // if (!aulaExistente.getTurma().getProfessor().getId().equals(professorId)) {
-        //     return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        // }
+
 
         aulaService.deletar(id);
         return ResponseEntity.noContent().build();

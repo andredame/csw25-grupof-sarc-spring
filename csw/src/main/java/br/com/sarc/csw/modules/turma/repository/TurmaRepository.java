@@ -1,15 +1,32 @@
 package br.com.sarc.csw.modules.turma.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import br.com.sarc.csw.modules.turma.model.Turma;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-@Repository
 public interface TurmaRepository extends JpaRepository<Turma, Long> {
-    List<Turma> findByProfessorId(UUID professorId);
 
-    boolean existsByIdAndProfessorId(Long turmaId, UUID professorId);
+    // Lista todas as turmas com disciplina e professor carregados
+    @Query("SELECT DISTINCT t FROM Turma t " +
+           "JOIN FETCH t.disciplina d " +
+           "JOIN FETCH t.professor p")
+    List<Turma> findAllWithDetails();
+
+    // Lista turmas por professor, com disciplina e professor carregados
+    @Query("SELECT DISTINCT t FROM Turma t " +
+           "JOIN FETCH t.disciplina d " +
+           "JOIN FETCH t.professor p " +
+           "WHERE p.id = :professorId")
+    List<Turma> findByProfessorIdWithDetails(@Param("professorId") UUID professorId);
+
+    // Opcional: Se precisar de alunos junto, pode adicionar JOIN FETCH t.alunos al, mas CUIDADO com o produto cartesiano.
+    // Para muitos alunos, é melhor carregar os alunos em uma query separada (ex: TurmaService.listarAlunosDeTurma)
+
+    // Outros métodos existentes
+    Optional<Turma> findById(Long id); // Mantém o método padrão se necessário para buscas simples
 }

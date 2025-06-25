@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 public class ReservaDTO {
 
     @NotNull(message = "O ID do recurso é obrigatório")
-    private Long id_recurso;
+    private Long recursoId;
 
     @NotNull(message = "O ID da aula é obrigatório")
-    private Long id_aula;
+    private Long aulaId;
 }

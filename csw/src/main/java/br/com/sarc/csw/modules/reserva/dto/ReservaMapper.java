@@ -16,11 +16,11 @@ public class ReservaMapper {
         ReservaDTO dto = new ReservaDTO();
 
         if (reserva.getAula() != null) {
-            dto.setId_aula(reserva.getAula().getId());
+            dto.setAulaId(reserva.getAula().getId());
         }
 
         if (reserva.getRecurso() != null) {
-            dto.setId_recurso(reserva.getRecurso().getId());
+            dto.setRecursoId(reserva.getRecurso().getId());
         }
 
         return dto;
@@ -33,15 +33,15 @@ public class ReservaMapper {
 
         Reserva reserva = new Reserva();
 
-        if (dto.getId_aula() != null) {
+        if (dto.getAulaId() != null) {
             Aula aula = new Aula();
-            aula.setId(dto.getId_aula());
+            aula.setId(dto.getAulaId());
             reserva.setAula(aula);
         }
 
-        if (dto.getId_recurso() != null) {
+        if (dto.getRecursoId() != null) {
             Recurso recurso = new Recurso();
-            recurso.setId(dto.getId_recurso());
+            recurso.setId(dto.getRecursoId());
             reserva.setRecurso(recurso);
         }
 

@@ -1,13 +1,33 @@
-INSERT INTO users (id, username, email) VALUES
-('fe18a691-e7f0-4c5c-964f-273382a34598','john','john@edu.pucrs.br'), -- Professor 1
-('0c13c1a7-8dbe-447f-bd1c-2ae0e7a931fc','roberto','roberto@edu.pucrs.br'), -- Professor 2
-('83e75657-dc1a-4656-879a-254e69862639','edgar dos santos','edgardossantos@edu.pucrs.br'), -- Aluno 1
-('79353a90-fd24-41de-b85d-9ff6ec3f5b10','andresilva','andresilva@edu.pucrs.br'), -- Aluno 2
-('3e111e87-bd14-4918-9594-1af9f4437b0b','maria eduarda','mariaeduarda@edu.pucrs.br'), -- Coordenador (ou outro papel que não professor)
-('300de63f-b5f4-499f-aeb0-b8d23eeea80b','vitor','vitor@edu.pucrs.br'), -- ALUNO (conforme sua especificação)
-('7799d77f-3286-4364-a83b-c797a32de6e9','eduardo','eduardo@edu.pucrs.br'), -- Aluno 3
-('55ba0910-db17-4763-bf2a-9978e09e2835','gabriel','gabriel@edu.pucrs.br'); -- Adicionado ';' aqui
+-- Insert roles first
+INSERT INTO role (id, name) VALUES
+(1, 'PROFESSOR'), -- Assuming '1' is the ID for PROFESSOR based on your error and usage
+(2, 'ALUNO'),     -- Assuming '2' is the ID for ALUNO
+(3, 'COORDENADOR'), -- Assuming '3' is the ID for COORDENADOR
+(4, 'ADMIN');     -- Assuming '4' is the ID for ADMIN
 
+-- Then, insert users and user_roles
+INSERT INTO users (id, username, email) VALUES
+('fe18a691-e7f0-4c5c-964f-273382a34598','john','john@edu.pucrs.br'),
+('0c13c1a7-8dbe-447f-bd1c-2ae0e7a931fc','roberto','roberto@edu.pucrs.br'),
+('83e75657-dc1a-4656-879a-254e69862639','edgar dos santos','edgardossantos@edu.pucrs.br'),
+('79353a90-fd24-41de-b85d-9ff6ec3f5b10','andresilva','andresilva@edu.pucrs.br'),
+('3e111e87-bd14-4918-9594-1af9f4437b0b','maria eduarda','mariaeduarda@edu.pucrs.br'),
+('300de63f-b5f4-499f-aeb0-b8d23eeea80b','vitor','vitor@edu.pucrs.br'),
+('7799d77f-3286-4364-a83b-c797a32de6e9','eduardo','eduardo@edu.pucrs.br'),
+('55ba0910-db17-4763-bf2a-9978e09e2835','gabriel','gabriel@edu.pucrs.br');
+
+
+-- (rest of your script.sql content)
+
+INSERT INTO user_role (user_id, role_id) VALUES
+('fe18a691-e7f0-4c5c-964f-273382a34598', 1), -- john is PROFESSOR
+('0c13c1a7-8dbe-447f-bd1c-2ae0e7a931fc', 1), -- roberto is PROFESSOR
+('83e75657-dc1a-4656-879a-254e69862639', 2), -- edgar dos santos is ALUNO
+('79353a90-fd24-41de-b85d-9ff6ec3f5b10', 2), -- andresilva is ALUNO
+('3e111e87-bd14-4918-9594-1af9f4437b0b', 3), -- maria eduarda is COORDENADOR
+('300de63f-b5f4-499f-aeb0-b8d23eeea80b', 2), -- vitor is ALUNO
+('7799d77f-3286-4364-a83b-c797a32de6e9', 2), -- eduardo is ALUNO
+('55ba0910-db17-4763-bf2a-9978e09e2835', 2); -- gabriel is ALUNO
 
 -- Inserindo dados na tabela 'disciplina' (Adicionando mais disciplinas)
 INSERT INTO disciplina ( codigo, nome, creditos, semestre, programa) VALUES
@@ -141,3 +161,4 @@ INSERT INTO reserva ( aula_id, recurso_id) VALUES
 ( 13, 8), -- Aula 13 (Cálculo I), Lousa Interativa 1
 ( 15, 10),-- Aula 15 (Física Geral), Kit Robótica 1
 ( 17, 9); -- Adicionado ';' aqui
+

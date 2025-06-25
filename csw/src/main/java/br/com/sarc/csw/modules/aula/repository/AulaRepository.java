@@ -3,47 +3,49 @@ package br.com.sarc.csw.modules.aula.repository;
 import br.com.sarc.csw.modules.aula.model.Aula;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface AulaRepository extends JpaRepository<Aula, Long> {
 
-    // Consulta para carregar todas as aulas com detalhes de Turma, Disciplina, Professor, Sala e Prédio
-    // O FETCH na ManyToMany (alunos) pode causar um produto cartesiano.
-    // Para muitos alunos por turma, é mais eficiente carregar alunos separadamente se a lista de aulas for grande,
-    // ou usar "DISTINCT" se a lista de aulas não for grande, para evitar duplicações.
-    // Para começar, vamos focar nos relacionamentos ManyToOne.
+    // Lista todas as aulas com todos os detalhes relacionados para evitar N+1
     @Query("SELECT DISTINCT a FROM Aula a " +
            "JOIN FETCH a.turma t " +
-           "JOIN FETCH t.disciplina d " +
-           "JOIN FETCH t.professor p " + // Adicionado JOIN FETCH para o professor da turma
+           "LEFT JOIN FETCH t.disciplina d " + // Usar LEFT JOIN FETCH para disciplina e professor caso sejam opcionais
+           "LEFT JOIN FETCH t.professor p " +
            "JOIN FETCH a.sala s " +
-           "JOIN FETCH s.predio pr")
+           "LEFT JOIN FETCH s.predio pr") // LEFT JOIN FETCH para prédio caso seja opcional
     List<Aula> findAllWithDetails();
 
-    // Se você também precisa dos alunos para cada turma na mesma consulta,
-    // o que pode gerar mais resultados duplicados se uma turma tiver muitos alunos e aulas:
-    // @Query("SELECT DISTINCT a FROM Aula a " +
-    //        "JOIN FETCH a.turma t " +
-    //        "JOIN FETCH t.disciplina d " +
-    //        "JOIN FETCH t.professor p " +
-    //        "JOIN FETCH t.alunos al " + // CUIDADO: pode gerar muitas linhas
-    //        "JOIN FETCH a.sala s " +
-    //        "JOIN FETCH s.predio pr")
-    // List<Aula> findAllWithAllDetails();
-
-    // Se você tiver outros métodos de busca (como por data), também precisará de versões JOIN FETCH
+    // Busca aulas por professor, carregando todos os detalhes
     @Query("SELECT DISTINCT a FROM Aula a " +
            "JOIN FETCH a.turma t " +
-           "JOIN FETCH t.disciplina d " +
-           "JOIN FETCH t.professor p " +
+           "LEFT JOIN FETCH t.disciplina d " +
+           "LEFT JOIN FETCH t.professor p " +
            "JOIN FETCH a.sala s " +
-           "JOIN FETCH s.predio pr " +
-           "WHERE a.data = :data")
-    List<Aula> findByDataWithDetails(java.time.LocalDate data);
+           "LEFT JOIN FETCH s.predio pr " +
+           "WHERE p.id = :professorId") // Filtra pelo ID do professor da turma
+    List<Aula> findByTurmaProfessorIdWithDetails(@Param("professorId") UUID professorId);
 
-    // ... Mantenha seus outros métodos de repositório (findByTurmaId, etc.) se forem necessários
-    List<Aula> findByTurmaIdAndTurmaProfessorId(Long turmaId, java.util.UUID professorId);
+    // Busca aulas por data, carregando todos os detalhes
+    @Query("SELECT DISTINCT a FROM Aula a " +
+           "JOIN FETCH a.turma t " +
+           "LEFT JOIN FETCH t.disciplina d " +
+           "LEFT JOIN FETCH t.professor p " +
+           "JOIN FETCH a.sala s " +
+           "LEFT JOIN FETCH s.predio pr " +
+           "WHERE a.data = :data")
+    List<Aula> findByDataWithDetails(@Param("data") LocalDate data);
+
+
+    // Métodos originais (se ainda utilizados e com carregamento básico)
+    // Opcional: Manter findByTurmaIdAndTurmaProfessorId se precisar de uma query mais leve
+    List<Aula> findByTurmaIdAndTurmaProfessorId(Long turmaId, UUID professorId);
     List<Aula> findByTurmaId(Long turmaId);
-    boolean existsBySalaIdAndDataAndPeriodo(Long salaId, java.time.LocalDate data, br.com.sarc.csw.core.enums.PeriodoAula periodo);
-    List<Aula> findByTurmaProfessorId(java.util.UUID professorId);
+    boolean existsBySalaIdAndDataAndPeriodo(Long salaId, LocalDate data, br.com.sarc.csw.core.enums.PeriodoAula periodo);
+    // Nota: findByTurmaProfessorId agora tem uma versão WithDetails, considere migrar o uso no service
 }

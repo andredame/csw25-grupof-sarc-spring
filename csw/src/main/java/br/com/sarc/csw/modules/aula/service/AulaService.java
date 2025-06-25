@@ -3,6 +3,8 @@ package br.com.sarc.csw.modules.aula.service;
 import br.com.sarc.csw.core.enums.PeriodoAula;
 import br.com.sarc.csw.modules.aula.model.Aula;
 import br.com.sarc.csw.modules.aula.repository.AulaRepository;
+import br.com.sarc.csw.modules.reserva.model.Reserva;
+import br.com.sarc.csw.modules.reserva.repository.ReservaRepository;
 import br.com.sarc.csw.modules.sala.model.Sala;
 import br.com.sarc.csw.modules.sala.repository.SalaRepository;
 import br.com.sarc.csw.modules.turma.model.Turma;
@@ -25,6 +27,9 @@ public class AulaService {
 
     @Autowired
     private SalaRepository salaRepository; // Inject SalaRepository
+
+    @Autowired
+    private ReservaRepository reservaRepository; // Inject ReservaRepository
 
     public List<Aula> listarAulasPorTurmaEProfessor(Long turmaId, UUID professorId) {
         return aulaRepository.findByTurmaIdAndTurmaProfessorId(turmaId, professorId);
@@ -139,11 +144,21 @@ public class AulaService {
         return null;
     }
     public void deletar(Long id) {
-        aulaRepository.deleteById(id);
+        Aula aulaToDelete = aulaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Aula não encontrada com ID: " + id));
+
+        // PASSO 1: Buscar todas as reservas associadas a esta aula
+        List<Reserva> reservasAssociadas = reservaRepository.findByAulaId(id); // Este método será adicionado no ReservaRepository
+        if (!reservasAssociadas.isEmpty()) {
+            reservaRepository.deleteAll(reservasAssociadas); // Deleta as reservas
+        }
+
+        // PASSO 3: Agora que as reservas foram deletadas, você pode deletar a aula
+        aulaRepository.delete(aulaToDelete);
     }
 
     public List<Aula> listarAulasPorProfessor(UUID professorId) {
-        return aulaRepository.findByTurmaProfessorId(professorId);
+        return aulaRepository.findByTurmaProfessorIdWithDetails(professorId);
     }
 
     // New method to check if a sala is available for a given date and period

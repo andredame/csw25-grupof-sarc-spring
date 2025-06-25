@@ -3,6 +3,7 @@ package br.com.sarc.csw.modules.reserva.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import br.com.sarc.csw.modules.aula.repository.AulaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,12 @@ public class ReservaService {
     @Autowired
     private AulaRepository aulaRepository; // Inject AulaRepository
 
-    public List<Reserva> listarTodas() {
-        return reservaRepository.findAll();
+     public List<Reserva> listarTodasReservas() {
+        return reservaRepository.findAllWithDetails(); // Alterado para usar a query otimizada
+    }
+
+    public List<Reserva> listarReservasPorProfessor(UUID professorId) {
+        return reservaRepository.findAllByAulaProfessorIdWithDetails(professorId);
     }
 
     public Reserva obterPorId(Long id) {
@@ -40,9 +45,7 @@ public class ReservaService {
     }
 
     public Reserva criar(Reserva reserva) {
-        // Before creating a reservation, ensure the associated Aula exists and the resource is available.
-        // The availability check is handled by recursoDisponivelParaAula.
-        // It's good practice to also check if aula exists:
+        
         if (reserva.getAula() == null || !aulaRepository.existsById(reserva.getAula().getId())) {
             throw new IllegalArgumentException("Aula associada à reserva não encontrada.");
         }
@@ -61,8 +64,7 @@ public class ReservaService {
         return null;
     }
 
-    public boolean recursoDisponivelParaAula(Long recursoId, LocalDate data, PeriodoAula periodo) { // Changed data type to LocalDate
-        // Busca o recurso
+    public boolean recursoDisponivelParaAula(Long recursoId, LocalDate data, PeriodoAula periodo) { 
         Recurso recurso = recursoRepository.findById(recursoId).orElse(null);
         if (recurso == null) {
             throw new IllegalArgumentException("Recurso não encontrado");
@@ -72,7 +74,7 @@ public class ReservaService {
         }
 
         // Busca todas as reservas desse recurso
-        List<Reserva> reservas = reservaRepository.findAllByRecursoId(recursoId);
+        List<Reserva> reservas = reservaRepository.findAllWithDetailsByRecursoId(recursoId);
         for (Reserva reserva : reservas) {
             Aula aula = reserva.getAula();
             // Verifica se já existe reserva para o mesmo dia e período

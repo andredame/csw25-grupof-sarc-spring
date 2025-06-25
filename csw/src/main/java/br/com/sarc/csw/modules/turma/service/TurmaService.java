@@ -25,13 +25,6 @@ public class TurmaService {
     private DisciplinaRepository disciplinaRepository; // Injetar DisciplinaRepository
 
 
-    public List<Turma> listarTurmasPorProfessor(UUID professorId) {
-        return turmaRepository.findByProfessorId(professorId);
-    }
-
-    public List<Turma> listarTodasTurmas() {
-        return turmaRepository.findAll();
-    }
 
     public Turma obterPorId(Long id) {
         return turmaRepository.findById(id).orElse(null);
@@ -47,6 +40,14 @@ public class TurmaService {
             throw new IllegalArgumentException("Professor associado à turma não encontrado.");
         }
         return turmaRepository.save(turma);
+    }
+
+     public List<Turma> listarTodasTurmas() {
+        return turmaRepository.findAllWithDetails();
+    }
+
+    public List<Turma> listarTurmasPorProfessor(UUID professorId) {
+        return turmaRepository.findByProfessorIdWithDetails(professorId);
     }
 
     public Turma atualizarTurma(Long id, Turma turmaAtualizada) {

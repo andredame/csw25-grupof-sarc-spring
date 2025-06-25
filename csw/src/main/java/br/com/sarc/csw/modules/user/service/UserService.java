@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,9 +20,7 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado: " + id));
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
+
 
     public User createUser(User user) {
         // Adicione validações, se necessário (ex.: verificar email único)
@@ -40,5 +39,13 @@ public class UserService {
             throw new RuntimeException("Usuário não encontrado: " + id);
         }
         userRepository.deleteById(id);
+    }
+
+    public List<User> listarTodosUsuarios() {
+        return userRepository.findAllWithRoles(); // Alterado para usar a query otimizada
+    }
+
+    public Optional<User> buscarUsuarioPorId(UUID id) {
+        return userRepository.findByIdWithRoles(id); // Alterado para usar a query otimizada
     }
 }

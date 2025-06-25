@@ -12,4 +12,5 @@ public class ReservaResponseDTO {
     private Long id;
     private AulaResponseDTO aula;
     private RecursoDTO recurso;
+    
 }
