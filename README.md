@@ -184,7 +184,7 @@ docker cp keycloak:/opt/keycloak/data/export/sarc-realm.json ./keycloak-export/
 
 
 # Entrega 3 FRONTEND
-siga as orientações do README do frontend para configurar o ambiente.
+Siga as orientações do README do frontend para configurar o ambiente.
 
 ## 📚 Referências
 
