@@ -47,13 +47,26 @@ public class ReservaMapper {
 
         return reserva;
     }
-
-    public static ReservaResponseDTO toResponseDTO(Reserva reserva) {
+public static ReservaResponseDTO toResponseDTO(Reserva reserva) {
         if (reserva == null) return null;
-        return new ReservaResponseDTO(
-            reserva.getId(),
-            AulaMapper.toResponseDTO(reserva.getAula()),
-            RecursoMapper.toDTO(reserva.getRecurso())
-        );
+
+        ReservaResponseDTO dto = new ReservaResponseDTO();
+        dto.setId(reserva.getId()); // <--- CRÍTICO: Copia o ID da reserva
+        
+        
+        if (reserva.getAula() != null) {
+            dto.setAula(AulaMapper.toResponseDTO(reserva.getAula()));
+        } else {
+            dto.setAula(null);
+        }
+
+        // Mapeia o objeto Recurso completo usando RecursoMapper
+        if (reserva.getRecurso() != null) {
+            dto.setRecurso(RecursoMapper.toDTO(reserva.getRecurso())); // Assumindo RecursoMapper.toDTO mapeia Recurso para RecursoDTO
+        } else {
+            dto.setRecurso(null);
+        }
+
+        return dto;
     }
 }

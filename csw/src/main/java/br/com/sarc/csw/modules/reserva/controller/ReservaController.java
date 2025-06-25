@@ -3,6 +3,7 @@ package br.com.sarc.csw.modules.reserva.controller;
 
 import br.com.sarc.csw.modules.reserva.dto.ReservaDTO;
 import br.com.sarc.csw.modules.reserva.dto.ReservaMapper;
+import br.com.sarc.csw.modules.reserva.dto.ReservaResponseDTO;
 import br.com.sarc.csw.modules.reserva.model.Reserva;
 import br.com.sarc.csw.modules.reserva.service.ReservaService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -28,10 +29,10 @@ public class ReservaController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('PROFESSOR', 'ALUNO', 'COORDENADOR', 'ADMIN')")
-    public ResponseEntity<List<ReservaDTO>> listarTodasReservas() {
+    public ResponseEntity<List<ReservaResponseDTO>> listarTodasReservas() {
         try {
             List<Reserva> reservas = reservaService.listarTodasReservas();
-            return ResponseEntity.ok(reservas.stream().map(ReservaMapper::toDTO).collect(Collectors.toList()));
+            return ResponseEntity.ok(reservas.stream().map(ReservaMapper::toResponseDTO).collect(Collectors.toList()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao listar reservas.", e);
         }
@@ -67,12 +68,13 @@ public class ReservaController {
         }
     }
 
-    @GetMapping("/professor/{professorId}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COORDENADOR') or (hasRole('PROFESSOR') and #professorId == principal.subject)")
-    public ResponseEntity<List<ReservaDTO>> listarReservasPorProfessor(@PathVariable UUID professorId) {
+   @GetMapping("/professor/{professorId}")
+    public ResponseEntity<List<ReservaResponseDTO>> listarReservasPorProfessor(@PathVariable UUID professorId) {
         try {
             List<Reserva> reservas = reservaService.listarReservasPorProfessor(professorId);
-            return ResponseEntity.ok(reservas.stream().map(ReservaMapper::toDTO).collect(Collectors.toList()));
+            return ResponseEntity.ok(reservas.stream()
+                    .map(ReservaMapper::toResponseDTO)
+                    .collect(Collectors.toList())); // ✅ Aqui também
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao listar reservas do professor.", e);
         }
