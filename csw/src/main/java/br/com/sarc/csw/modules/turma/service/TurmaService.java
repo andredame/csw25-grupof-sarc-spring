@@ -81,39 +81,50 @@ public class TurmaService {
         Turma turma = turmaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Turma não encontrada")); // Changed RuntimeException to IllegalArgumentException
         return turma.getAlunos();
     }
-
-
     public User vincularAlunoATurma(Long turmaId, UUID alunoId) {
-        Turma turma = turmaRepository.findById(turmaId).orElseThrow(() -> new IllegalArgumentException("Turma não encontrada."));
-        User aluno = userRepository.findById(alunoId).orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado."));
-
-        // Validação: Checar se o aluno já está na turma
+        // 1. Verifique se a turma existe
+        Turma turma = turmaRepository.findById(turmaId)
+            .orElseThrow(() -> new IllegalArgumentException("Turma não encontrada com ID: " + turmaId));
+        
+        // 2. Verifique se o aluno existe
+        User aluno = userRepository.findById(alunoId)
+            .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado com ID: " + alunoId));
+        
+        // 3. Verifique se o usuário é realmente um aluno
+        if (aluno.getRoles() == null || aluno.getRoles().stream()
+            .noneMatch(role -> "ALUNO".equals(role.getName()))) {
+            throw new IllegalArgumentException("O usuário não tem a role ALUNO");
+        }
+        
+        // 4. Verifique se o aluno já está na turma
         if (turma.getAlunos().contains(aluno)) {
-            throw new IllegalArgumentException("Aluno já está matriculado nesta turma.");
+            throw new IllegalStateException("Aluno já está matriculado nesta turma");
         }
-
-        // Validação: Checar se há vagas disponíveis
+        
+        // 5. Verifique vagas disponíveis
         if (turma.getVagas() != null && turma.getAlunos().size() >= turma.getVagas()) {
-            throw new IllegalStateException("Não há vagas disponíveis nesta turma.");
+            throw new IllegalStateException("Não há vagas disponíveis nesta turma");
         }
-
+        
+        // 6. Adicione o aluno e salve
         turma.getAlunos().add(aluno);
         turmaRepository.save(turma);
         return aluno;
     }
-
     public Turma vincularProfessorATurma(Long turmaId, UUID professorId) {
-        Turma turma = turmaRepository.findById(turmaId).orElseThrow(() -> new IllegalArgumentException("Turma não encontrada."));
-        User professor = userRepository.findById(professorId).orElseThrow(() -> new IllegalArgumentException("Professor não encontrado."));
-
-        // Validação: Só altera se for diferente
-        if (turma.getProfessor() == null || !turma.getProfessor().getId().equals(professorId)) {
-            turma.setProfessor(professor);
-            turmaRepository.save(turma);
-        } else {
-            throw new IllegalArgumentException("O professor já está associado a esta turma.");
+        Turma turma = turmaRepository.findById(turmaId)
+            .orElseThrow(() -> new IllegalArgumentException("Turma não encontrada com ID: " + turmaId));
+        
+        User professor = userRepository.findById(professorId)
+            .orElseThrow(() -> new IllegalArgumentException("Professor não encontrado com ID: " + professorId));
+        
+        // Verifique se o usuário é realmente um professor
+        if (professor.getRoles() == null || professor.getRoles().stream()
+            .noneMatch(role -> "PROFESSOR".equals(role.getName()))) {
+            throw new IllegalArgumentException("O usuário não tem a role PROFESSOR");
         }
 
-        return turma;
+        turma.setProfessor(professor);
+        return turmaRepository.save(turma);
     }
 }

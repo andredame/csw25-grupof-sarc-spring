@@ -49,6 +49,13 @@ public class ReservaService {
         if (reserva.getAula() == null || !aulaRepository.existsById(reserva.getAula().getId())) {
             throw new IllegalArgumentException("Aula associada à reserva não encontrada.");
         }
+        if (reserva.getRecurso() == null || !recursoRepository.existsById(reserva.getRecurso().getId())) {
+            throw new IllegalArgumentException("Recurso associado à reserva não encontrado.");
+        }
+        if (reservaRepository.existsByAulaIdAndRecursoId(reserva.getAula().getId(), reserva.getRecurso().getId())) {
+            throw new IllegalArgumentException("Já existe uma reserva para esta aula e recurso.");
+        }
+        
         return reservaRepository.save(reserva);
     }
 

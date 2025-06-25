@@ -57,12 +57,12 @@ public class TurmaController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('PROFESSOR', 'COORDENADOR', 'ALUNO')") // Allow all relevant roles
-    public ResponseEntity<List<TurmaDTO>> listarTodasTurmas() {
+    public ResponseEntity<List<TurmaResponseDTO>> listarTodasTurmas() {
         try {
             List<Turma> turmas = turmaService.listarTodasTurmas();
             // No need to throw if empty, an empty list is a valid response
-            List<TurmaDTO> turmasDTO = turmas.stream()
-                    .map(TurmaMapper::toDTO)
+            List<TurmaResponseDTO> turmasDTO = turmas.stream()
+                    .map(TurmaMapper::toResponseDTO)
                     .collect(Collectors.toList());
             return ResponseEntity.ok(turmasDTO);
         } catch (Exception e) {
@@ -146,16 +146,18 @@ public class TurmaController {
 
     @PostMapping("/{turmaId}/alunos/{alunoId}")
     @PreAuthorize("hasRole('COORDENADOR')")
-    public ResponseEntity<AlunoResponseDTO> vincularAlunoATurma(@PathVariable Long turmaId, @PathVariable UUID alunoId) {
+    public ResponseEntity<AlunoResponseDTO> vincularAlunoATurma(
+        @PathVariable Long turmaId, 
+        @PathVariable UUID alunoId) {
+        
         try {
-            // Service now throws exceptions for not found, duplicate, or no vagas
             User alunoVinculado = turmaService.vincularAlunoATurma(turmaId, alunoId);
-            AlunoResponseDTO responseDTO = UserMapper.toAlunoResponseDTO(alunoVinculado);
-            return ResponseEntity.status(HttpStatus.OK).body(responseDTO); // Changed to OK or CREATED if preferred
-        } catch (IllegalArgumentException | IllegalStateException e) { // Catch specific business logic exceptions
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+            return ResponseEntity.ok(UserMapper.toAlunoResponseDTO(alunoVinculado));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new AlunoResponseDTO(null, e.getMessage(), null));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao vincular aluno à turma", e);
+            return ResponseEntity.internalServerError()
+                .body(new AlunoResponseDTO(null, "Erro interno: " + e.getMessage(), null));
         }
     }
 

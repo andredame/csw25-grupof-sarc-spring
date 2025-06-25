@@ -3,6 +3,8 @@ package br.com.sarc.csw.modules.recurso.controller;
 import br.com.sarc.csw.modules.recurso.dto.RecursoDTO;
 import br.com.sarc.csw.modules.recurso.dto.RecursoMapper;
 import br.com.sarc.csw.modules.recurso.model.Recurso;
+import br.com.sarc.csw.modules.recurso.model.TipoRecurso;
+import br.com.sarc.csw.modules.recurso.repository.TipoRecursoRepository;
 import br.com.sarc.csw.modules.recurso.service.RecursoService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -20,6 +22,7 @@ import java.util.List;
 public class RecursoController {
 
     private final RecursoService recursoService;
+    private final TipoRecursoRepository tipoRecursoRepository;
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('COORDENADOR')")
@@ -58,5 +61,10 @@ public class RecursoController {
     public ResponseEntity<Void> deletarRecurso(@PathVariable Long id) {
         boolean deletado = recursoService.deletar(id);
         return deletado ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/tipos")
+    public List<TipoRecurso> listarTodos() {
+        return tipoRecursoRepository.findAll();
     }
 }

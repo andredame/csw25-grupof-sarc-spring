@@ -2,6 +2,7 @@ package br.com.sarc.csw.modules.turma.dto;
 
 import lombok.Data;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,7 +48,6 @@ public class TurmaDTO {
     @Schema(description = "Número de vagas disponíveis na turma", example = "30", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer vagas;
 
-    @NotNull(message = "A lista de alunos não pode ser nula")
-    @Schema(description = "Lista de alunos vinculados à turma", requiredMode = Schema.RequiredMode.NOT_REQUIRED) // Corrigido Schema description
-    private List<@NotNull(message = "Aluno na lista de alunos não pode ser nulo") AlunoResponseDTO> alunos; // Campo para saída (lista de objetos AlunoResponseDTO)
+    private List<AlunoResponseDTO> alunos = Collections.emptyList(); // Valor padrão vazio
+
 }

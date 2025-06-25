@@ -23,6 +23,8 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
            "LEFT JOIN FETCH rec.tipoRecurso tr") // LEFT JOIN FETCH para tipoRecurso
     List<Reserva> findAllWithDetails();
 
+
+
     List<Reserva> findByAulaId(Long aulaId); // Este método já existe e é usado no AulaService.deletar
 
     @Query("SELECT DISTINCT r FROM Reserva r " +
@@ -36,6 +38,8 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
            "LEFT JOIN FETCH rec.tipoRecurso tr " +
            "WHERE rec.id = :recursoId")
     List<Reserva> findAllWithDetailsByRecursoId(@Param("recursoId") Long recursoId);
+    boolean existsByAulaIdAndRecursoId(Long aulaId, Long recursoId); // <--- Adicione este método
+
 
     @Query("SELECT DISTINCT r FROM Reserva r " +
            "JOIN FETCH r.aula a " +
