@@ -186,6 +186,12 @@ docker cp keycloak:/opt/keycloak/data/export/sarc-realm.json ./keycloak-export/
 # Entrega 3 FRONTEND
 Siga as orientações do README do frontend para configurar o ambiente.
 
+```bash 
+cd .. 
+cd frontend
+git clone https://github.com/andredame/csw-front-react-tailwind.git
+```
+
 ## 📚 Referências
 
 - [Keycloak Documentation](https://www.keycloak.org/documentation.html)
