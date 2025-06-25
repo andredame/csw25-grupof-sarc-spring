@@ -144,7 +144,7 @@ public class TurmaController {
         }
     }
 
-    @PostMapping("/{turmaId}/alunos/{alunoId}")
+    @PutMapping("/{turmaId}/alunos/{alunoId}")
     @PreAuthorize("hasRole('COORDENADOR')")
     public ResponseEntity<AlunoResponseDTO> vincularAlunoATurma(
         @PathVariable Long turmaId, 
@@ -173,6 +173,22 @@ public class TurmaController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao vincular professor à turma", e);
+        }
+    }
+
+    @DeleteMapping("/{turmaId}/alunos/{alunoId}")
+    @PreAuthorize("hasRole('COORDENADOR')") // Apenas COORDENADOR pode remover aluno
+    public ResponseEntity<Void> removerAlunoDeTurma(
+            @PathVariable Long turmaId,
+            @PathVariable UUID alunoId) {
+        try {
+            turmaService.removerAlunoDeTurma(turmaId, alunoId);
+            return ResponseEntity.noContent().build(); // Retorna 204 No Content se sucesso
+        } catch (IllegalArgumentException e) {
+            // Se turma ou aluno não encontrados, ou aluno não está na turma
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao remover aluno da turma", e);
         }
     }
 }

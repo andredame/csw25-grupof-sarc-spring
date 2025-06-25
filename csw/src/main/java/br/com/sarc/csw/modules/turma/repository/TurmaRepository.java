@@ -16,6 +16,8 @@ public interface TurmaRepository extends JpaRepository<Turma, Long> {
            "JOIN FETCH t.disciplina d " +
            "JOIN FETCH t.professor p")
     List<Turma> findAllWithDetails();
+    @Query("SELECT t FROM Turma t LEFT JOIN FETCH t.alunos WHERE t.id = :id")
+    Optional<Turma> findByIdWithAlunos(@Param("id") Long id);
 
     // Lista turmas por professor, com disciplina e professor carregados
     @Query("SELECT DISTINCT t FROM Turma t " +

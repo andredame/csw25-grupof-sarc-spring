@@ -5,6 +5,7 @@ import br.com.sarc.csw.modules.turma.model.Turma;
 import br.com.sarc.csw.modules.turma.repository.TurmaRepository;
 import br.com.sarc.csw.modules.user.model.User;
 import br.com.sarc.csw.modules.user.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,5 +127,22 @@ public class TurmaService {
 
         turma.setProfessor(professor);
         return turmaRepository.save(turma);
+    }
+    @Transactional // Adicione @Transactional para operações que modificam a entidade
+    public void removerAlunoDeTurma(Long turmaId, UUID alunoId) {
+        Turma turma = turmaRepository.findByIdWithAlunos(turmaId) 
+                .orElseThrow(() -> new IllegalArgumentException("Turma não encontrada."));
+
+        User aluno = userRepository.findById(alunoId)
+                .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado."));
+
+        // Verifica se o aluno está realmente na turma
+        boolean removed = turma.getAlunos().removeIf(a -> a.getId().equals(alunoId));
+
+        if (!removed) {
+            throw new IllegalArgumentException("Aluno não está matriculado nesta turma.");
+        }
+
+        turmaRepository.save(turma); // Salva a turma com o aluno removido
     }
 }
